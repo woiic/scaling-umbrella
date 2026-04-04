@@ -1,0 +1,3 @@
+D:/CGame/scaling-umbrella/build/CMakeFiles/SCALING_UMBRELLA.dir
+D:/CGame/scaling-umbrella/build/CMakeFiles/ALL_BUILD.dir
+D:/CGame/scaling-umbrella/build/CMakeFiles/ZERO_CHECK.dir

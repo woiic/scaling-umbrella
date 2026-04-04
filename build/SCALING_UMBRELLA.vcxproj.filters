@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\CGame\scaling-umbrella\src\Core\Engine.cpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CGame\scaling-umbrella\src\Core\GameLogic.cpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CGame\scaling-umbrella\src\Core\InputHandler.cpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CGame\scaling-umbrella\src\Core\Renderer.cpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CGame\scaling-umbrella\src\main.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\CGame\scaling-umbrella\src\Core\Engine.hpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CGame\scaling-umbrella\src\Core\GameLogic.hpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CGame\scaling-umbrella\src\Core\InputHandler.hpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CGame\scaling-umbrella\src\Core\Renderer.hpp">
+      <Filter>Source Files\src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CGame\scaling-umbrella\src\Math\Scalar.hpp">
+      <Filter>Source Files\src\Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CGame\scaling-umbrella\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E8D3D174-CCBA-30CF-BAFE-58B0B3E5E45B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{6EAA9085-1B3F-3B80-87FF-6AC56B625560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Core">
+      <UniqueIdentifier>{FF4249DE-5B98-3266-B405-3DF422BDFB5C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Math">
+      <UniqueIdentifier>{5BE9E617-144D-341B-9F52-A0419DE11D95}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

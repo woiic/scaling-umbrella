@@ -1,0 +1,10 @@
+^D:\CGAME\SCALING-UMBRELLA\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CGame/scaling-umbrella -BD:/CGame/scaling-umbrella/build --check-stamp-file D:/CGame/scaling-umbrella/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
