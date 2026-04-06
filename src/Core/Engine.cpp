@@ -2,22 +2,23 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_video.h>
-#include "InputHandler.hpp"
+#include "Input/InputHandler.hpp"
+
+#include "Game/Game.hpp"
 #include "Engine.hpp"
 
 
 Engine::Engine()
-    : window(nullptr), renderer(nullptr), running(false), device(nullptr) {}
+    : window(nullptr), renderer(nullptr), running(false), device(nullptr), inputHandler(nullptr) {}
 
 Engine::~Engine() {
     Shutdown();
 }
 
 bool Engine::Init(const char* title, int width, int height) {
-    if (!SDL_Init(SDL_INIT_VIDEO)) {
-        std::cerr << "SDL_Init failed: " << SDL_GetError() << std::endl;
-        return 1;
-    }
+
+    renderer = new Renderer();
+    renderer->Init();
 
     // Create window
     window = SDL_CreateWindow(title, width, height, SDL_WINDOW_RESIZABLE);
@@ -32,12 +33,13 @@ bool Engine::Init(const char* title, int width, int height) {
     if (device) {
         SDL_ClaimWindowForGPUDevice(device, window);
     }
+    
     inputHandler = new InputHandler();
     running = true;
     return true;
 }
 
-void Engine::Run() {
+void Engine::Run(Game& inGame) {
     Uint64 lastTime = SDL_GetTicks();
 
     while (running) {
@@ -45,14 +47,16 @@ void Engine::Run() {
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
 
-        HandleEvents();
+        MouseState mouseState = HandleEvents();
         Update(deltaTime);
-        Render();
+        inGame.Update(mouseState);
+
+        Render(&inGame);
         SDL_Delay(16);  // ~60 FPS
     }
 }
 
-void Engine::HandleEvents() {
+MouseState Engine::HandleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_EVENT_QUIT) {
@@ -61,27 +65,26 @@ void Engine::HandleEvents() {
         else inputHandler->HandleMouseEvent(event);
     }
     MouseState mouseState = inputHandler->GetMouseState();
-    std::cout << mouseState.mousePosition.x << std::endl;
+    return mouseState;
 }
 
-void Engine::Update(float deltaTime) {
+void Engine::Update(float deltaTime)
+{
     // TODO: Game logic here
 }
 
-void Engine::Render() {
-    SDL_SetRenderDrawColor(renderer, 25, 25, 25, 255);
-    SDL_RenderClear(renderer);
-
-    SDL_FRect rect = { 350.0f, 250.0f, 100.0f, 100.0f };
-    SDL_SetRenderDrawColor(renderer, 200, 50, 50, 255);
-    SDL_RenderFillRect(renderer, &rect);
-
-    SDL_RenderPresent(renderer);
+void Engine::Render(Game *inGame) 
+{
+    renderer->Clear();
+    inGame->Render(*renderer);
+    renderer->Present();
+    
 }
 
 void Engine::Shutdown() {
     if (renderer) {
-        SDL_DestroyRenderer(renderer);
+        //SDL_DestroyRenderer(renderer);
+        renderer->Destroy();
         renderer = nullptr;
     }
 

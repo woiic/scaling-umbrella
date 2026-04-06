@@ -65,6 +65,8 @@ target_link_directories(SCALING_UMBRELLA PRIVATE
   
 )
 
+target_include_directories(SCALING_UMBRELLA PRIVATE src)
+
 # Set configuration properties for LENGINE
 if(MSVC)
     target_compile_options(SCALING_UMBRELLA PRIVATE

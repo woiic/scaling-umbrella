@@ -1,0 +1,480 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::Headers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__Headers-Debug-59eee1d401884207392b.json",
+					"name" : "SDL3::Headers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::SDL3-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__SDL3-shared-Debug-bc34e98dbdfbb5ddcff5.json",
+					"name" : "SDL3::SDL3-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_image::SDL3_image-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_image__SDL3_image-shared-Debug-978781229b030afee44c.json",
+					"name" : "SDL3_image::SDL3_image-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_mixer::SDL3_mixer-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_mixer__SDL3_mixer-shared-Debug-b355b106d31ac5c9825c.json",
+					"name" : "SDL3_mixer::SDL3_mixer-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_ttf::SDL3_ttf-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_ttf__SDL3_ttf-shared-Debug-9eb07214df28418c9dc4.json",
+					"name" : "SDL3_ttf::SDL3_ttf-shared",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SCALING_UMBRELLA",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-8e14ee86db3faf3ac572.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SCALING_UMBRELLA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SCALING_UMBRELLA-Debug-9f2a35eb0b9e68e9b5f8.json",
+					"name" : "SCALING_UMBRELLA",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-77473eef6bdf5ca8fc6f.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::Headers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__Headers-Release-59eee1d401884207392b.json",
+					"name" : "SDL3::Headers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::SDL3-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__SDL3-shared-Release-6ea41dc3ec575e8ac0e4.json",
+					"name" : "SDL3::SDL3-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_image::SDL3_image-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_image__SDL3_image-shared-Release-59989be15b801c780629.json",
+					"name" : "SDL3_image::SDL3_image-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_mixer::SDL3_mixer-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_mixer__SDL3_mixer-shared-Release-629625c4471a07b21e0e.json",
+					"name" : "SDL3_mixer::SDL3_mixer-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_ttf::SDL3_ttf-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_ttf__SDL3_ttf-shared-Release-0fb2636ff26f7770e216.json",
+					"name" : "SDL3_ttf::SDL3_ttf-shared",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SCALING_UMBRELLA",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-8e14ee86db3faf3ac572.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SCALING_UMBRELLA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SCALING_UMBRELLA-Release-b5e79d9a2fe9130fdfee.json",
+					"name" : "SCALING_UMBRELLA",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-77473eef6bdf5ca8fc6f.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::Headers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__Headers-MinSizeRel-59eee1d401884207392b.json",
+					"name" : "SDL3::Headers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::SDL3-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__SDL3-shared-MinSizeRel-6ea41dc3ec575e8ac0e4.json",
+					"name" : "SDL3::SDL3-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_image::SDL3_image-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_image__SDL3_image-shared-MinSizeRel-59989be15b801c780629.json",
+					"name" : "SDL3_image::SDL3_image-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_mixer::SDL3_mixer-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_mixer__SDL3_mixer-shared-MinSizeRel-629625c4471a07b21e0e.json",
+					"name" : "SDL3_mixer::SDL3_mixer-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_ttf::SDL3_ttf-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_ttf__SDL3_ttf-shared-MinSizeRel-0fb2636ff26f7770e216.json",
+					"name" : "SDL3_ttf::SDL3_ttf-shared",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-MinSizeRel-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "MinSizeRel",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SCALING_UMBRELLA",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-MinSizeRel-8e14ee86db3faf3ac572.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SCALING_UMBRELLA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SCALING_UMBRELLA-MinSizeRel-32eafbf313df53af2206.json",
+					"name" : "SCALING_UMBRELLA",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-MinSizeRel-77473eef6bdf5ca8fc6f.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				}
+			]
+		},
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::Headers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__Headers-RelWithDebInfo-59eee1d401884207392b.json",
+					"name" : "SDL3::Headers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::SDL3-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__SDL3-shared-RelWithDebInfo-6ea41dc3ec575e8ac0e4.json",
+					"name" : "SDL3::SDL3-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_image::SDL3_image-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_image__SDL3_image-shared-RelWithDebInfo-59989be15b801c780629.json",
+					"name" : "SDL3_image::SDL3_image-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_mixer::SDL3_mixer-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_mixer__SDL3_mixer-shared-RelWithDebInfo-629625c4471a07b21e0e.json",
+					"name" : "SDL3_mixer::SDL3_mixer-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_ttf::SDL3_ttf-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_ttf__SDL3_ttf-shared-RelWithDebInfo-0fb2636ff26f7770e216.json",
+					"name" : "SDL3_ttf::SDL3_ttf-shared",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-RelWithDebInfo-f040eec181a89de70dbe.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SCALING_UMBRELLA",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-RelWithDebInfo-8e14ee86db3faf3ac572.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SCALING_UMBRELLA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SCALING_UMBRELLA-RelWithDebInfo-381040157067347a3e9b.json",
+					"name" : "SCALING_UMBRELLA",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-RelWithDebInfo-77473eef6bdf5ca8fc6f.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/CGame/scaling-umbrella/build",
+		"source" : "D:/CGame/scaling-umbrella"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	}
+}

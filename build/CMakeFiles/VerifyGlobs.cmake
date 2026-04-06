@@ -80,9 +80,9 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/CGame/scaling-umbrella/src/*.cpp")
 set(OLD_GLOB
   "D:/CGame/scaling-umbrella/src/Core/Engine.cpp"
-  "D:/CGame/scaling-umbrella/src/Core/GameLogic.cpp"
-  "D:/CGame/scaling-umbrella/src/Core/InputHandler.cpp"
-  "D:/CGame/scaling-umbrella/src/Core/Renderer.cpp"
+  "D:/CGame/scaling-umbrella/src/Game/Game.cpp"
+  "D:/CGame/scaling-umbrella/src/Graphic/Renderer.cpp"
+  "D:/CGame/scaling-umbrella/src/Input/InputHandler.cpp"
   "D:/CGame/scaling-umbrella/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
@@ -134,10 +134,11 @@ endif()
 # SCALING_UMBRELLA_SRC_SOURCES at CMakeLists.txt:32 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/CGame/scaling-umbrella/src/*.hpp")
 set(OLD_GLOB
+  "D:/CGame/scaling-umbrella/src/Core/CoreStructs.hpp"
   "D:/CGame/scaling-umbrella/src/Core/Engine.hpp"
-  "D:/CGame/scaling-umbrella/src/Core/GameLogic.hpp"
-  "D:/CGame/scaling-umbrella/src/Core/InputHandler.hpp"
-  "D:/CGame/scaling-umbrella/src/Core/Renderer.hpp"
+  "D:/CGame/scaling-umbrella/src/Game/Game.hpp"
+  "D:/CGame/scaling-umbrella/src/Graphic/Renderer.hpp"
+  "D:/CGame/scaling-umbrella/src/Input/InputHandler.hpp"
   "D:/CGame/scaling-umbrella/src/Math/Scalar.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

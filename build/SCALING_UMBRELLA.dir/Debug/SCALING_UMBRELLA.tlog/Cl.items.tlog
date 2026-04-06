@@ -1,5 +1,5 @@
 D:\CGame\scaling-umbrella\src\Core\Engine.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\Engine.obj
-D:\CGame\scaling-umbrella\src\Core\GameLogic.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\GameLogic.obj
-D:\CGame\scaling-umbrella\src\Core\InputHandler.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\InputHandler.obj
-D:\CGame\scaling-umbrella\src\Core\Renderer.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\Renderer.obj
+D:\CGame\scaling-umbrella\src\Game\Game.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\Game.obj
+D:\CGame\scaling-umbrella\src\Graphic\Renderer.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\Renderer.obj
+D:\CGame\scaling-umbrella\src\Input\InputHandler.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\InputHandler.obj
 D:\CGame\scaling-umbrella\src\main.cpp;D:\CGame\scaling-umbrella\build\SCALING_UMBRELLA.dir\Debug\main.obj
