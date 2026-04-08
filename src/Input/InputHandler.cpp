@@ -3,7 +3,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_video.h>
 #include "InputHandler.hpp"
-#include "../Math/Scalar.hpp"
+#include "Math/MathUtils.hpp"
 
 InputHandler::InputHandler()
 {

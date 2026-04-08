@@ -7,18 +7,28 @@ Renderer::Renderer()
 {
 }
 
-bool Renderer::Init()
+bool Renderer::PreInit()
 {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         std::cerr << "SDL_Init failed: " << SDL_GetError() << std::endl;
         return 1;
     }
+    return 1;
+}
+
+bool Renderer::Init(SDL_Window *window, WindowData inWindowData)
+{
+    if (!SDL_CreateWindowAndRenderer("examples/renderer/rectangles", inWindowData.width, inWindowData.height, SDL_WINDOW_RESIZABLE, &window, &SDLRenderer)) {
+        SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
+        return false;
+    }
+    SDL_SetRenderLogicalPresentation(SDLRenderer, inWindowData.width, inWindowData.height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     return true;
 }
 
 void Renderer::Clear()
 {
-    SDL_SetRenderDrawColor(SDLRenderer, 25, 25, 25, 255);
+    bool output = SDL_SetRenderDrawColor(SDLRenderer, 255, 255, 255, 255);
     SDL_RenderClear(SDLRenderer);
 };
 
@@ -27,29 +37,22 @@ void Renderer::Present()
     SDL_RenderPresent(SDLRenderer);
 }
 
-void Renderer::DrawRect(SDL_Color inColor, SDL_FRect inRect)
+//void Renderer::DrawRect(SDL_Color inColor, SDL_FRect inRect)
+void Renderer::DrawRect(Color inColor, FRect inRect)
+{
+    
+    SDL_FRect tRect = GetSDLFRect(inRect);
+    SDL_SetRenderDrawColor(SDLRenderer, inColor.r, inColor.g, inColor.b, inColor.a);
+    
+    //SDL_RenderFillRect(SDLRenderer, &tRect);
+    SDL_RenderRect(SDLRenderer, &tRect);
+}
+
+//void Renderer::RenderBackGround(SDL_Color inColor)
+void Renderer::RenderBackGround(Color inColor)
 {
     SDL_SetRenderDrawColor(SDLRenderer, inColor.r, inColor.g, inColor.b, inColor.a);
-    SDL_RenderFillRect(SDLRenderer, &inRect);
-    return ;
-}
-
-void Renderer::RenderBackGround(SDL_Color inColor)
-{
-    SDL_FRect rect = { 350.0f, 250.0f, 100.0f, 100.0f };
-    SDL_SetRenderDrawColor(SDLRenderer, 200, 50, 50, 255);
-    SDL_RenderFillRect(SDLRenderer, &rect);
-}
-
-SDL_Color Renderer::GetColor(int a, int r, int g, int b)
-{
-    SDL_Color BGColor = SDL_Color();
-    BGColor.a = a;
-    BGColor.r = r;
-    BGColor.g = g;
-    BGColor.b = b;
-
-    return BGColor;
+    SDL_RenderClear(SDLRenderer);
 }
 
 void Renderer::Destroy()

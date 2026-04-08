@@ -17,23 +17,11 @@ Engine::~Engine() {
 
 bool Engine::Init(const char* title, int width, int height) {
 
+    WindowData newWindowData = WindowData(title, width, height);
     renderer = new Renderer();
-    renderer->Init();
-
-    // Create window
-    window = SDL_CreateWindow(title, width, height, SDL_WINDOW_RESIZABLE);
-    if (!window) {
-        std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
-    }
-
-    // Create GPU device (optional, for rendering)
-    device = SDL_CreateGPUDevice(SDL_GPU_SHADERFORMAT_SPIRV, false, nullptr);
-    if (device) {
-        SDL_ClaimWindowForGPUDevice(device, window);
-    }
-    
+    renderer->PreInit();
+    renderer->Init(window, newWindowData);
+   
     inputHandler = new InputHandler();
     running = true;
     return true;

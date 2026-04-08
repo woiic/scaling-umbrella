@@ -14,32 +14,52 @@ Game::~Game()
 
 void Game::Start()
 {
-
+    GameObjectsList = std::vector<GameObject>();
 }
 
 void Game::Update(MouseState inMouseState) 
 {
-    if (inMouseState.bIsLeftJustPressed) LeftIsJustPressed();
-    if (inMouseState.bIsLeftHeld) LeftIsHeld();
-    if (inMouseState.bIsLeftJustPressed) LeftIsJustReleased();
+    if (inMouseState.bIsLeftJustPressed) LeftIsJustPressed(inMouseState);
+    if (inMouseState.bIsLeftHeld) LeftIsHeld(inMouseState);
+    if (inMouseState.bIsLeftJustReleased) LeftIsJustReleased(inMouseState);
 
     return;
 }
 
-void Game::LeftIsJustPressed()
+void Game::LeftIsJustPressed(MouseState inMouseState)
 {
+    //startPoint = inMouseState.mousePosition;
+    GameObject tempObj = GameObject();
+    tempObj.ObjectArea2D.position = inMouseState.mousePosition;//startPoint;
+
+    std::cout << inMouseState.mousePosition.to_string() << std::endl;
+    tempObj.ObjectArea2D.color = Color(255, 255, 255, 255);
+    GameObjectsList.push_back(tempObj);
+    FocusedObject = &GameObjectsList.back();
+}
+void Game::LeftIsHeld(MouseState inMouseState)
+{
+    if(!FocusedObject) return ;
+    FocusedObject->ObjectArea2D.width = inMouseState.mousePosition.x - FocusedObject->ObjectArea2D.position.x;
+    FocusedObject->ObjectArea2D.height = inMouseState.mousePosition.y - FocusedObject->ObjectArea2D.position.y;
+    endPoint = inMouseState.mousePosition;
+}
+void Game::LeftIsJustReleased(MouseState inMouseState)
+{
+    FocusedObject = nullptr;
+    endPoint = inMouseState.mousePosition;
 
 }
-void Game::LeftIsHeld()
-{
-}
-void Game::LeftIsJustReleased()
-{
-}
 
-void Game::Render(Renderer& inRender)
+void Game::Render(Renderer& inRenderer)
 {
-    SDL_Color BGColor = inRender.GetColor(255, 200, 50, 50);
-    inRender.RenderBackGround(BGColor);
-    
+    Color BGColor = Color(200, 50, 50, 255);
+    inRenderer.RenderBackGround(BGColor);
+    int cont = 0;
+    for (auto& obj : GameObjectsList) {
+        obj.Render(inRenderer);
+        cont +=1;
+        // printear el rect
+        //std::cout << cont << std::endl;
+    }
 }
