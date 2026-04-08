@@ -1,2 +1,2 @@
 # scaling-umbrella
-C++ project woo
+C++ project
