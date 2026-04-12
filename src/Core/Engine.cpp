@@ -30,6 +30,7 @@ bool Engine::Init(const char* title, int width, int height) {
 void Engine::Run(Game& inGame) {
     Uint64 lastTime = SDL_GetTicks();
 
+    inGame.Start();
     while (running) {
         Uint64 currentTime = SDL_GetTicks();
         float deltaTime = (currentTime - lastTime) / 1000.0f;

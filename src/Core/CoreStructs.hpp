@@ -1,31 +1,18 @@
 #pragma once
 #include <string>
 
-
-struct WindowData
+struct IPoint
 {
-    const char* title;
-    int width;
-    int height;
-    WindowData(const char* inTitle, int inWidth, int inHeight){
-        title = inTitle;
-        width = inWidth;
-        height = inHeight;
-    }
-};
+    int x=0;
+    int y=0;
 
-struct Point
-{
-    float x=0.0f;
-    float y=0.0f;
-
-    Point()
+    IPoint()
     {
-        x = 0.0f;
-        y = 0.0f;
+        x = 0;
+        y = 0;
     }
 
-    Point(float a, float b)
+    IPoint(int a, int b)
     {
         x = a;
         y = b;
@@ -35,17 +22,47 @@ struct Point
         return "x: " + std::to_string(x) + ", " + "y: " + std::to_string(y);
     }
 
-    Point operator+(const Point& other) const {
+    IPoint operator+(const IPoint& other) const {
         return { x + other.x, y + other.y };
     }
 
-    Point operator-(const Point& other) const {
+    IPoint operator-(const IPoint& other) const {
+        return { x - other.x, y - other.y };
+    }
+};
+
+struct FPoint
+{
+    float x=0.0f;
+    float y=0.0f;
+
+    FPoint()
+    {
+        x = 0.0f;
+        y = 0.0f;
+    }
+
+    FPoint(float a, float b)
+    {
+        x = a;
+        y = b;
+    }
+
+    std::string to_string() const {
+        return "x: " + std::to_string(x) + ", " + "y: " + std::to_string(y);
+    }
+
+    FPoint operator+(const FPoint& other) const {
+        return { x + other.x, y + other.y };
+    }
+
+    FPoint operator-(const FPoint& other) const {
         return { x - other.x, y - other.y };
     }
 };
 
 struct MouseState{
-    Point mousePosition;
+    FPoint mousePosition;
     bool bIsLeftJustPressed;
     bool bIsLeftHeld;
     bool bIsLeftJustReleased;
@@ -54,7 +71,7 @@ struct MouseState{
     bool bIsRightJustReleased;
     MouseState()
     {
-        mousePosition = Point(0.0f, 0.0f);
+        mousePosition = FPoint(0.0f, 0.0f);
         bIsLeftJustPressed = false;
         bIsLeftHeld = false;
         bIsLeftJustReleased = false;
@@ -73,6 +90,20 @@ struct MouseState{
     }
 };
 
+// -- SDL data Adapters -- //
+
+struct WindowData
+{
+    const char* title;
+    int width;
+    int height;
+    WindowData(const char* inTitle, int inWidth, int inHeight){
+        title = inTitle;
+        width = inWidth;
+        height = inHeight;
+    }
+};
+
 // ------------------------ RenderingStuff ------------------------ //
 
 struct Color{
@@ -88,7 +119,17 @@ struct Color{
         a=inA;
     }
 };
+/*
+    [x,y] -------> w
+                   ||
+                   ||                  
+                   ||
+                   ||
+                   ||
+                   \/
+                   H
 
+*/
 struct FRect {
     float x;
     float y;
@@ -102,19 +143,51 @@ struct FRect {
     }
 };
 
+struct FGeometry {
+    float v;
+    FGeometry()
+    {
+
+    }
+};
+
+/*
+typedef struct SDL_Vertex
+{
+    SDL_FPoint position;        /**< Vertex position, in SDL_Renderer coordinates  
+    SDL_FColor color;           /**< Vertex color 
+    SDL_FPoint tex_coord;       /**< Normalized texture coordinates, if needed 
+} SDL_Vertex;
+*/
+struct Vertex
+{
+    FPoint position;
+    Color color;
+    FPoint text_coord;
+};
+
+struct Texture
+{
+    char* path;
+    char* file_name;
+    int texture_width = 0;
+    int texture_height = 0;
+};
+
 struct Area2D{
-    Point position; //upper left
+    FPoint position; //upper left
     float width;
     float height;
     Color color;
+
     Area2D()
     {
-        position = Point(0.0f, 0.0f);
+        position = FPoint(0.0f, 0.0f);
         width = 0.0f;
         height = 0.0f;
         color = Color();
     }
-    Area2D(Point inPos, float inWidth, float inHeight, Color inColor)
+    Area2D(FPoint inPos, float inWidth, float inHeight, Color inColor)
     {
         position = inPos;
         width = inWidth;

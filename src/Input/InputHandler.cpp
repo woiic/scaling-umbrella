@@ -22,7 +22,7 @@ MouseState InputHandler::GetMouseState()
     
     float mouseX, mouseY;
     Uint32 buttonState = SDL_GetMouseState(&mouseX, &mouseY);
-    actualMouseState.mousePosition = Point(mouseX, mouseY);
+    actualMouseState.mousePosition = FPoint(mouseX, mouseY);
     if (buttonState & SDL_BUTTON_LMASK) actualMouseState.bIsLeftHeld = true;
     if (buttonState & SDL_BUTTON_RMASK) actualMouseState.bIsRightHeld = true;
 
@@ -35,7 +35,7 @@ void InputHandler::HandleMouseEvent(const SDL_Event& event) {
 
     float mouseX, mouseY;
     Uint32 buttonState = SDL_GetMouseState(&mouseX, &mouseY);
-    actualMouseState.mousePosition = Point(mouseX, mouseY);
+    actualMouseState.mousePosition = FPoint(mouseX, mouseY);
 
     if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
         if (event.button.button == SDL_BUTTON_LEFT) {

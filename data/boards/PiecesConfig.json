@@ -1,0 +1,10 @@
+{
+    "default_white_config":{
+        "Row1":["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"],
+        "Row2":["Tower", "Knight", "Bishop", "King", "Queen", "Bishop", "Knight", "Tower"]
+    },
+    "default_black_config":{
+        "Row1":["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"],
+        "Row2":["Tower", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Tower"]
+    }
+}

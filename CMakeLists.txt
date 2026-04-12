@@ -7,6 +7,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(SCALING_UMBRELLA VERSION 1.0)
 
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -45,6 +46,7 @@ target_include_directories(SCALING_UMBRELLA PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/data
 )
 
 # Preprocessor defines
@@ -66,6 +68,9 @@ target_link_directories(SCALING_UMBRELLA PRIVATE
 )
 
 target_include_directories(SCALING_UMBRELLA PRIVATE src)
+
+add_custom_command(TARGET SCALING_UMBRELLA POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/assets" "$<TARGET_FILE_DIR:SCALING_UMBRELLA>/assets")
+add_custom_command(TARGET SCALING_UMBRELLA POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data" "$<TARGET_FILE_DIR:SCALING_UMBRELLA>/data")
 
 # Set configuration properties for LENGINE
 if(MSVC)

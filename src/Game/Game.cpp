@@ -15,24 +15,39 @@ Game::~Game()
 void Game::Start()
 {
     GameObjectsList = std::vector<GameObject>();
+    LastGameState = ActualGameState = GameState::Start;
 }
 
 void Game::Update(MouseState inMouseState) 
 {
+    switch (ActualGameState)
+    {
+    case GameState::Start:
+        if (ActualGameState != LastGameState) //First frame check
+        {
+            // Init Board
+            GameBoard.InitBoard(8, 8);
+
+        }
+        LastGameState = ActualGameState;
+        break;
+    
+    default:
+        break;
+    }
+    
+    /*
     if (inMouseState.bIsLeftJustPressed) LeftIsJustPressed(inMouseState);
     if (inMouseState.bIsLeftHeld) LeftIsHeld(inMouseState);
     if (inMouseState.bIsLeftJustReleased) LeftIsJustReleased(inMouseState);
-
+    */
     return;
 }
 
 void Game::LeftIsJustPressed(MouseState inMouseState)
 {
-    //startPoint = inMouseState.mousePosition;
     GameObject tempObj = GameObject();
-    tempObj.ObjectArea2D.position = inMouseState.mousePosition;//startPoint;
-
-    std::cout << inMouseState.mousePosition.to_string() << std::endl;
+    tempObj.ObjectArea2D.position = inMouseState.mousePosition;
     tempObj.ObjectArea2D.color = Color(255, 255, 255, 255);
     GameObjectsList.push_back(tempObj);
     FocusedObject = &GameObjectsList.back();
@@ -48,7 +63,6 @@ void Game::LeftIsJustReleased(MouseState inMouseState)
 {
     FocusedObject = nullptr;
     endPoint = inMouseState.mousePosition;
-
 }
 
 void Game::Render(Renderer& inRenderer)
@@ -59,7 +73,5 @@ void Game::Render(Renderer& inRenderer)
     for (auto& obj : GameObjectsList) {
         obj.Render(inRenderer);
         cont +=1;
-        // printear el rect
-        //std::cout << cont << std::endl;
     }
 }

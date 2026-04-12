@@ -3,7 +3,11 @@
 #include "Core/CoreStructs.hpp"
 #include "Graphic/Renderer.hpp"
 #include "GameObject.hpp"
+#include "GameEnums.hpp"
+#include "BoardStuff/Board.hpp"
+
 #include "Math/MathUtils.hpp"
+
 
 
 class Game {
@@ -27,9 +31,18 @@ public:
     std::vector<GameObject> GameObjectsList;
     GameObject *FocusedObject;
 
+    GameState LastGameState;
+    GameState ActualGameState;
+
+public:
+    //Specific game stuff
+
+    Board GameBoard;
+
+
 // For rendering custom rectangles
 public:
-    Point startPoint;
-    Point endPoint;
+    FPoint startPoint;
+    FPoint endPoint;
 
 };
