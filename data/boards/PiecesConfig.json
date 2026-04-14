@@ -1,10 +1,14 @@
 {
     "default_white_config":{
-        "Row1":["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"],
-        "Row2":["Tower", "Knight", "Bishop", "King", "Queen", "Bishop", "Knight", "Tower"]
+        "Row1":{"RowNumber":0,
+               "RowElements":["Tower", "Knight", "Bishop", "King", "Queen", "Bishop", "Knight", "Tower"]},
+        "Row2":{"RowNumber":1,
+                "RowElements":["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"]}
     },
     "default_black_config":{
-        "Row1":["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"],
-        "Row2":["Tower", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Tower"]
+        "Row1":{"RowNumber":0,
+               "RowElements":["Tower", "Knight", "Bishop", "King", "Queen", "Bishop", "Knight", "Tower"]},
+        "Row2":{"RowNumber":1,
+                "RowElements":["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"]}
     }
 }

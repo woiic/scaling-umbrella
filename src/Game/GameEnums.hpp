@@ -2,7 +2,8 @@
 
 enum GameState
 {
-    Start=0,
+    None=0,
+    Start, // Initializing
     InGame,
     PostGame
 };

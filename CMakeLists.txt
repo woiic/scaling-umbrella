@@ -16,6 +16,7 @@ find_package(SDL3 CONFIG REQUIRED)
 find_package(SDL3_image CONFIG REQUIRED)
 find_package(SDL3_mixer CONFIG REQUIRED)
 find_package(SDL3_ttf CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 
 # No C++20 modules
 set(CMAKE_CXX_SCAN_FOR_MODULES OFF) 
@@ -60,6 +61,7 @@ target_link_libraries(SCALING_UMBRELLA PRIVATE
     SDL3_image::SDL3_image
     SDL3_mixer::SDL3_mixer
     SDL3_ttf::SDL3_ttf
+    nlohmann_json::nlohmann_json
 )
 
 # Add directories with any random loose .dlls or .libs here

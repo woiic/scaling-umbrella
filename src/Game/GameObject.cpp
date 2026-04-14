@@ -1,13 +1,13 @@
 #pragma once
-#include "GameObject.hpp"
 
+#include "Graphic/Renderer.hpp"
+
+#include "GameObject.hpp"
 
 GameObject::GameObject()
 {
     ObjectArea2D = Area2D();
 }
-
-
 
 void GameObject::Render(Renderer& inRenderer)
 {
@@ -21,4 +21,9 @@ void GameObject::Render(Renderer& inRenderer)
         inRenderer.DrawTexture(tempRect, path, fileName);
         */
     }
+}
+
+void GameObject::setArea2D(Area2D inArea2D)
+{
+    ObjectArea2D = inArea2D;
 }

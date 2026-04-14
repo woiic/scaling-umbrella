@@ -15,7 +15,8 @@ Game::~Game()
 void Game::Start()
 {
     GameObjectsList = std::vector<GameObject>();
-    LastGameState = ActualGameState = GameState::Start;
+    LastGameState = GameState::None;
+    ActualGameState = GameState::Start;
 }
 
 void Game::Update(MouseState inMouseState) 
@@ -27,7 +28,7 @@ void Game::Update(MouseState inMouseState)
         {
             // Init Board
             GameBoard.InitBoard(8, 8);
-
+            GameBoard.InitPieces();
         }
         LastGameState = ActualGameState;
         break;
@@ -43,7 +44,7 @@ void Game::Update(MouseState inMouseState)
     */
     return;
 }
-
+// Clicking Testing
 void Game::LeftIsJustPressed(MouseState inMouseState)
 {
     GameObject tempObj = GameObject();
@@ -69,9 +70,14 @@ void Game::Render(Renderer& inRenderer)
 {
     Color BGColor = Color(200, 50, 50, 255);
     inRenderer.RenderBackGround(BGColor);
+    /* Clicking Testing
     int cont = 0;
     for (auto& obj : GameObjectsList) {
         obj.Render(inRenderer);
         cont +=1;
     }
+    */
+    GameBoard.Render(inRenderer);
+    
+
 }

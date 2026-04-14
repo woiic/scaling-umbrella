@@ -2,7 +2,7 @@
 #include "Math/MathUtils.hpp"
 #include "Core/CoreStructs.hpp"
 
-#include "Graphic/Renderer.hpp"
+class Renderer;
 
 class GameObject
 {
@@ -12,6 +12,8 @@ public:
     GameObject();
 
     Area2D ObjectArea2D;
-    void Render(Renderer& inRenderer);
+    virtual void Render(Renderer& inRenderer);
+
+    void setArea2D(Area2D inArea2D);
 
 };

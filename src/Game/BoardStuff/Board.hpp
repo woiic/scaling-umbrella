@@ -1,13 +1,16 @@
 #pragma once
 
-#include "Math/MathUtils.hpp"
-#include <memory>
+#include "Game/CommonHeader.hpp"
+//#include "Game/GameObject.hpp"
 
-#include "Tile.hpp"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include "Pieces/Piece.hpp"
+#include "Tile.hpp"
 
 
-class Board {
+class Board{
 public:
     
     Board();
@@ -21,10 +24,15 @@ public:
         return TilesBoard[i * boardWidth + j].get();
     }
     
-    std::vector<std::unique_ptr<Piece>> PiecesList;
+    std::vector<Piece*> PiecesList;
+
 
     void InitPieces();
+    bool AddPieces(json inJson);
+    std::unique_ptr<Piece> CreatePiece(IPoint inPos, const std::string& name);
 
+
+    void Render(Renderer& inRenderer);
 private:
 
 
