@@ -3,7 +3,7 @@
 #include "Core/CoreStructs.hpp"
 #include "Core/TextureManager.hpp"
 
-#include "Graphic/Renderer.hpp"
+#include "Core/Graphic/Renderer.hpp"
 #include "GameObject.hpp"
 #include "GameEnums.hpp"
 #include "BoardStuff/Board.hpp"
