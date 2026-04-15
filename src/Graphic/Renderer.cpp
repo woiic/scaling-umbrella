@@ -47,8 +47,8 @@ void Renderer::DrawRect(Color inColor, FRect inRect)
     SDL_FRect tRect = GetSDLFRect(inRect);
     SDL_SetRenderDrawColor(SDLRenderer, inColor.r, inColor.g, inColor.b, inColor.a);
     
-    //SDL_RenderFillRect(SDLRenderer, &tRect);
-    SDL_RenderRect(SDLRenderer, &tRect);
+    SDL_RenderFillRect(SDLRenderer, &tRect);
+    //SDL_RenderRect(SDLRenderer, &tRect);
 }
 
 bool Renderer::DrawGeometry(Color inColor, FGeometry inRect)

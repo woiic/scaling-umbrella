@@ -16,9 +16,12 @@ public:
     Board();
     std::vector<std::unique_ptr<Tile>> TilesBoard;
     
+    int TILE_WIDTH = 16;
+    int TILE_HEIGHT = 16;
+
     int boardWidth;
     int boardHeight;
-    void InitBoard(int inBoardWidth, int inBoardHeight);
+    void InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int inTileHeight);
 
     Tile* getTile(int i, int j){
         return TilesBoard[i * boardWidth + j].get();

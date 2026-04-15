@@ -16,21 +16,36 @@ void Game::Start()
 {
     GameObjectsList = std::vector<GameObject>();
     LastGameState = GameState::None;
-    ActualGameState = GameState::Start;
+    ActualGameState = GameState::Initializing;//GameState::Start;
 }
 
 void Game::Update(MouseState inMouseState) 
 {
     switch (ActualGameState)
     {
+    case GameState::Initializing:
+    {
+        if (ActualGameState != LastGameState) //First frame check
+        {
+            // Init Board
+            
+            //GameBoard.InitBoard(8, 8, 16, 16);
+            //GameBoard.InitPieces();
+            
+            LastGameState = ActualGameState;
+        }
+        ActualGameState = GameState::Start;
+        break;
+    }
     case GameState::Start:
         if (ActualGameState != LastGameState) //First frame check
         {
             // Init Board
-            GameBoard.InitBoard(8, 8);
+            GameBoard.InitBoard(8, 8, 16, 16);
             GameBoard.InitPieces();
+
+            LastGameState = ActualGameState;
         }
-        LastGameState = ActualGameState;
         break;
     
     default:

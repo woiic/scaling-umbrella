@@ -112,6 +112,7 @@ struct Color{
     int b;
     int a;
 
+
     Color(int inR=0, int inG=0, int inB=0, int inA=255) {
         r=inR;
         g=inG;

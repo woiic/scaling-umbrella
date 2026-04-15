@@ -14,9 +14,7 @@ Tile::Tile(IPoint inPosition, Board *inBoardRef)
     boardRef = inBoardRef;
 }
 
-
-
 void Tile::Render(Renderer& inRenderer)
 {
-    //GameObject::Render(inRenderer);
+    GameObject::Render(inRenderer);
 }

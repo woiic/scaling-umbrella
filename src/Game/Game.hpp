@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Core/CoreStructs.hpp"
+#include "Core/TextureManager.hpp"
+
 #include "Graphic/Renderer.hpp"
 #include "GameObject.hpp"
 #include "GameEnums.hpp"
