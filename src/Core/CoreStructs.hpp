@@ -167,14 +167,6 @@ struct Vertex
     FPoint text_coord;
 };
 
-struct Texture
-{
-    char* path;
-    char* file_name;
-    int texture_width = 0;
-    int texture_height = 0;
-};
-
 struct Area2D{
     FPoint position; //upper left
     float width;

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Core/CoreStructs.hpp"
-#include "Core/TextureManager.hpp"
-
+#include "Core/Graphic/TextureManager.hpp"
 #include "Core/Graphic/Renderer.hpp"
+
 #include "GameObject.hpp"
 #include "GameEnums.hpp"
 #include "BoardStuff/Board.hpp"
@@ -18,7 +18,8 @@ public:
     ~Game();
 
 
-    void Start();
+    void Start(Renderer& inRenderer);
+    //void Start();
 
     void Update(MouseState mouseState);
     
@@ -26,6 +27,9 @@ public:
     void LeftIsHeld(MouseState inMouseState);
     void LeftIsJustReleased(MouseState inMouseState);
 
+    void LoadTextures(Renderer& inRenderer);
+    //void LoadTextures();
+    
     void Render(Renderer &inRenderer);
 
 public:
@@ -44,6 +48,7 @@ public:
 
 // For rendering custom rectangles
 public:
+
     FPoint startPoint;
     FPoint endPoint;
 

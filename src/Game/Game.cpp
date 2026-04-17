@@ -12,11 +12,14 @@ Game::~Game()
     //Shutdown();
 }
 
-void Game::Start()
+//void Game::Start()
+void Game::Start(Renderer& inRenderer)
 {
     GameObjectsList = std::vector<GameObject>();
     LastGameState = GameState::None;
     ActualGameState = GameState::Initializing;//GameState::Start;
+    //LoadTextures(inRenderer);
+    LoadTextures(inRenderer);
 }
 
 void Game::Update(MouseState inMouseState) 
@@ -31,7 +34,6 @@ void Game::Update(MouseState inMouseState)
             
             //GameBoard.InitBoard(8, 8, 16, 16);
             //GameBoard.InitPieces();
-            
             LastGameState = ActualGameState;
         }
         ActualGameState = GameState::Start;
@@ -81,6 +83,12 @@ void Game::LeftIsJustReleased(MouseState inMouseState)
     endPoint = inMouseState.mousePosition;
 }
 
+//void Game::LoadTextures()
+void Game::LoadTextures(Renderer& inRenderer)
+{
+    TextureManager::Load(inRenderer, "assets/Sprites/", "64xMan.png");
+}
+
 void Game::Render(Renderer& inRenderer)
 {
     Color BGColor = Color(200, 50, 50, 255);
@@ -93,6 +101,6 @@ void Game::Render(Renderer& inRenderer)
     }
     */
     GameBoard.Render(inRenderer);
-    
+    // Render one texture    
 
 }

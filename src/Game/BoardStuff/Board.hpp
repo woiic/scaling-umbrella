@@ -34,10 +34,12 @@ public:
     bool AddPieces(json inJson);
     std::unique_ptr<Piece> CreatePiece(IPoint inPos, const std::string& name);
 
-
+    void TestRender(Renderer& inRenderer);
     void Render(Renderer& inRenderer);
+
 private:
 
+// only for testing
 
-
+    GameObject testGameObject = GameObject();
 };

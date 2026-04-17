@@ -23,6 +23,11 @@ void GameObject::Render(Renderer& inRenderer)
     }
 }
 
+void GameObject::testRender(Renderer& inRenderer)
+{
+    inRenderer.DrawTexture("64xMan.png");
+}
+
 void GameObject::setArea2D(Area2D inArea2D)
 {
     ObjectArea2D = inArea2D;

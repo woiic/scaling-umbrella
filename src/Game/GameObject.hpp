@@ -16,4 +16,7 @@ public:
 
     void setArea2D(Area2D inArea2D);
 
+public:
+// testing only
+    void testRender(Renderer& inRenderer);
 };

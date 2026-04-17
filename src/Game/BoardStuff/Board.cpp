@@ -114,6 +114,10 @@ std::unique_ptr<Piece> Board::CreatePiece(IPoint inPos, const std::string& name)
     return nullptr;
 }
 
+void Board::TestRender(Renderer& inRenderer)
+{
+    testGameObject.testRender(inRenderer);
+}
 
 void Board::Render(Renderer& inRenderer)
 {
@@ -128,4 +132,7 @@ void Board::Render(Renderer& inRenderer)
         p->Render(inRenderer);
     }
 
+    //TestRender(inRenderer);
+
+    return ;
 }

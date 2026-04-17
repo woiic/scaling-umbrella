@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_pixels.h>
+#include <string>
 
 #include "Core/CoreStructs.hpp"
 
@@ -11,6 +12,8 @@ private:
     SDL_Renderer* SDLRenderer;
 
 public:
+
+    SDL_Renderer* GetRenderer(){ return SDLRenderer; }
 
     Renderer();
     bool PreInit();
@@ -33,7 +36,7 @@ public:
     
     //bool DrawTexture(FRect inRect, const char* inFilePath,  const char* inFileName);
     //bool DrawTexture(FRect inRect, char* inFilePath,  char* inFileName);
-    bool DrawTexture(FRect inRect, std::string inFilePath,  std::string inFileName);
+    bool DrawTexture(std::string name);
     
     void Destroy();
 };
