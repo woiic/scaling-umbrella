@@ -20,7 +20,8 @@ bool Engine::Init(const char* title, int width, int height) {
     WindowData newWindowData = WindowData(title, width, height);
     renderer = new Renderer();
     renderer->PreInit();
-    renderer->Init(window, newWindowData);
+    //renderer->Init(window, newWindowData);
+    window = renderer->Init(newWindowData);
    
     inputHandler = new InputHandler();
     running = true;

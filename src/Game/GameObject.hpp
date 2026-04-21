@@ -2,7 +2,9 @@
 #include "Math/MathUtils.hpp"
 #include "Core/CoreStructs.hpp"
 
+
 class Renderer;
+class Sprite;
 
 class GameObject
 {
@@ -12,11 +14,14 @@ public:
     GameObject();
 
     Area2D ObjectArea2D;
+    
+    Sprite* ObjectSprite;
+
     virtual void Render(Renderer& inRenderer);
 
     void setArea2D(Area2D inArea2D);
 
 public:
 // testing only
-    void testRender(Renderer& inRenderer);
+    void RenderSprite(Renderer& inRenderer);
 };

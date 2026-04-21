@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "Core/Graphic/TextureManager.hpp"
 #include "Board.hpp"
 
 Board::Board()
@@ -19,9 +19,6 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
 {
     // Create board
 
-    TILE_WIDTH = inTileWidth;
-    TILE_HEIGHT = inTileHeight;
-
     boardWidth = inBoardWidth;
     boardHeight = inBoardHeight;
     
@@ -33,16 +30,20 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
             std::unique_ptr<Tile> ptr = std::make_unique<Tile>(IPoint(i, j), this);
 
             Color c;
-            if ((i+j)%2 == 0) c = Color(255,255,255);
-            else c = Color(0,0,0);
-            Area2D tempArea2D = Area2D(FPoint((float)(j*TILE_WIDTH), (float)(i*TILE_HEIGHT)), (float)TILE_WIDTH, (float)TILE_HEIGHT, c);
+            //if ((i+j)%2 == 0) c = Color(255,255,255);
+            //else c = Color(0,0,0);
+            if ((i+j)%2 == 0) ptr->ObjectSprite = TextureManager::Get("assets/Sprites/white_tile.png");
+            else ptr->ObjectSprite = TextureManager::Get("assets/Sprites/black_tile.png");
+            Area2D tempArea2D = Area2D(FPoint((float)(j*TILE_WIDTH), (float)(i*TILE_HEIGHT)),
+                                        (float)TILE_WIDTH,
+                                        (float)TILE_HEIGHT,
+                                        c);
             ptr->setArea2D(tempArea2D);
 
             TilesBoard.push_back(std::move(ptr));
         }   
     }
     
-    // Add pieces to the board
 }
 
 void Board::InitPieces()
@@ -69,33 +70,61 @@ bool Board::AddPieces(json inJson){
 
     auto whiteRowConfig = inJson["default_white_config"];
     auto blackRowConfig = inJson["default_black_config"];
-    int column=0;
+    int column = 0;
     for (const auto& Row : whiteRowConfig) {
         int row = Row["RowNumber"];
-        std::string pieceName = Row["RowElements"][column];
-        std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
-        Piece* ptr = newPiece.get();
-        PiecesList.push_back(ptr);
-
-        // Add piece to the board
-        Tile* tile = getTile(column, row);
-        tile->setPiece(std::move(newPiece));
-
-        column++;
+        column = 0;
+        for (const auto& piece : Row["RowElements"]) 
+        {
+            std::string pieceName = piece.get<std::string>();
+            std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
+            if (!newPiece) {
+                std::cout << "Piece problem" << std::endl;
+                column++;
+                continue;
+            }
+            
+            Piece* ptr = newPiece.get();
+            // Add piece to the board
+            Tile* tile = getTile(row, column);
+            if (!tile) {
+                std::cout << "Tile problem" << std::endl;
+                column++;
+                continue;
+            }
+            tile->setPiece(ptr);
+            
+            PiecesList.push_back(std::move(newPiece));
+            column++;
+        }
     }
 
     for (const auto& Row : blackRowConfig) {
-        int row = Row["RowNumber"];
-        std::string pieceName = Row["RowElements"][column];
-        std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(TILE_WIDTH-column,TILE_HEIGHT-row), pieceName);
-        Piece* ptr = newPiece.get();
-        PiecesList.push_back(ptr);
+        int row = (boardHeight - 1) - static_cast<int>(Row["RowNumber"]);
+        column = 0;
+        for (const auto& piece : Row["RowElements"]) 
+        {
+            std::string pieceName = piece.get<std::string>();
+            std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
+            if (!newPiece) {
+                std::cout << "Piece problem" << std::endl;
+                column++;
+                continue;
+            }
 
-        // Add piece to the board
-        Tile* tile = getTile(column, row);
-        tile->setPiece(std::move(newPiece));
+            Piece* ptr = newPiece.get();
+            // Add piece to the board
+            Tile* tile = getTile(row, column);
+            if (!tile) {
+                std::cout << "Tile problem" << std::endl;
+                column++;
+                continue;
+            }
+            tile->setPiece(ptr);
 
-        column++;
+            PiecesList.push_back(std::move(newPiece));
+            column++;
+        }
     }
 
     return true;
@@ -116,7 +145,7 @@ std::unique_ptr<Piece> Board::CreatePiece(IPoint inPos, const std::string& name)
 
 void Board::TestRender(Renderer& inRenderer)
 {
-    testGameObject.testRender(inRenderer);
+    testGameObject.RenderSprite(inRenderer);
 }
 
 void Board::Render(Renderer& inRenderer)
@@ -124,15 +153,18 @@ void Board::Render(Renderer& inRenderer)
     
     for (auto& t : TilesBoard)
     {
-        t->Render(inRenderer);
+        //t->Render(inRenderer);
+        t->RenderSprite(inRenderer);
     }
 
     for (auto& p : PiecesList)
     {
-        p->Render(inRenderer);
+        if (p) 
+        {
+            p->Render(inRenderer);
+        }
+        
     }
-
-    //TestRender(inRenderer);
-
+    
     return ;
 }

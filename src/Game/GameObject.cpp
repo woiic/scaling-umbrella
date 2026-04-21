@@ -1,12 +1,15 @@
 #pragma once
 
 #include "Core/Graphic/Renderer.hpp"
+#include "Core/Graphic/TextureManager.hpp"
+#include "Core/Graphic/Sprite.hpp"
 
 #include "GameObject.hpp"
 
 GameObject::GameObject()
 {
     ObjectArea2D = Area2D();
+    ObjectSprite = nullptr;
 }
 
 void GameObject::Render(Renderer& inRenderer)
@@ -15,17 +18,12 @@ void GameObject::Render(Renderer& inRenderer)
     {
         FRect tempRect = FRect(ObjectArea2D.position.x, ObjectArea2D.position.y, ObjectArea2D.width, ObjectArea2D.height);
         inRenderer.DrawRect(ObjectArea2D.color, tempRect);
-        /*
-        std::string path = "assets/Sprites/";
-        std::string fileName = "64xMan.png";
-        inRenderer.DrawTexture(tempRect, path, fileName);
-        */
     }
 }
 
-void GameObject::testRender(Renderer& inRenderer)
+void GameObject::RenderSprite(Renderer& inRenderer)
 {
-    inRenderer.DrawTexture("64xMan.png");
+    inRenderer.DrawSprite(ObjectSprite, ObjectArea2D);
 }
 
 void GameObject::setArea2D(Area2D inArea2D)

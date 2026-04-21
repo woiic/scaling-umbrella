@@ -1,5 +1,9 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <cstring>
+
 #include "Core/CoreStructs.hpp"
 #include "Core/Graphic/TextureManager.hpp"
 #include "Core/Graphic/Renderer.hpp"
@@ -22,12 +26,14 @@ public:
     //void Start();
 
     void Update(MouseState mouseState);
-    
+    /*
     void LeftIsJustPressed(MouseState inMouseState);
     void LeftIsHeld(MouseState inMouseState);
     void LeftIsJustReleased(MouseState inMouseState);
-
+    */
     void LoadTextures(Renderer& inRenderer);
+
+    void LoadSprites(Renderer& inRenderer);
     //void LoadTextures();
     
     void Render(Renderer &inRenderer);
@@ -35,7 +41,7 @@ public:
 public:
 
     std::vector<GameObject> GameObjectsList;
-    GameObject *FocusedObject;
+    //GameObject *FocusedObject;
 
     GameState LastGameState;
     GameState ActualGameState;

@@ -20,8 +20,10 @@ public:
     IPoint position;
     Board *boardRef = nullptr;
 
-    std::unique_ptr<Piece> AssignedPiece = nullptr;
-    void setPiece(std::unique_ptr<Piece> p) {
-        AssignedPiece = std::move(p);
+    //std::unique_ptr<Piece> AssignedPiece = nullptr;
+    Piece* AssignedPiece = nullptr;
+    //void setPiece(std::unique_ptr<Piece> p) {
+    void setPiece(Piece* p) {
+        AssignedPiece = p;
     }
 };

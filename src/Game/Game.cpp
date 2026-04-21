@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 
 #include "Game.hpp"
 
@@ -19,7 +18,7 @@ void Game::Start(Renderer& inRenderer)
     LastGameState = GameState::None;
     ActualGameState = GameState::Initializing;//GameState::Start;
     //LoadTextures(inRenderer);
-    LoadTextures(inRenderer);
+    LoadSprites(inRenderer);
 }
 
 void Game::Update(MouseState inMouseState) 
@@ -62,6 +61,7 @@ void Game::Update(MouseState inMouseState)
     return;
 }
 // Clicking Testing
+/*
 void Game::LeftIsJustPressed(MouseState inMouseState)
 {
     GameObject tempObj = GameObject();
@@ -82,6 +82,7 @@ void Game::LeftIsJustReleased(MouseState inMouseState)
     FocusedObject = nullptr;
     endPoint = inMouseState.mousePosition;
 }
+*/
 
 //void Game::LoadTextures()
 void Game::LoadTextures(Renderer& inRenderer)
@@ -89,17 +90,42 @@ void Game::LoadTextures(Renderer& inRenderer)
     TextureManager::Load(inRenderer, "assets/Sprites/", "64xMan.png");
 }
 
+void Game::LoadSprites(Renderer& inRenderer)
+{
+    std::string ID = "assets/Sprites/white_tile.png";
+    std::string path = "assets/Sprites/";
+    std::string w_name = "white_tile.png";
+    std::string b_name = "black_tile.png";
+    TextureManager::LoadByID(inRenderer, ID, path, w_name);
+    ID = "assets/Sprites/black_tile.png";
+    TextureManager::LoadByID(inRenderer, ID, path, b_name);
+    /*
+    auto tiles = j["Sprites"]["Tiles"];
+    auto path = tiles["sprite_folder"];
+    auto names = tiles["sprite_names"];
+    
+    std::cout << names["White"] << std::endl;
+    std::cout << path << std::endl;
+    if (names["White"].is_string() && path.is_string())
+    {
+        std::string ID = "Tiles/" + names["White"];
+        TextureManager::LoadByID(inRenderer, ID, (std::string)path, (std::string)names["White"]);
+    }
+    std::cout << names["Black"] << std::endl;
+    std::cout << path << std::endl;
+    if (names["Black"].is_string() && path.is_string())
+    {
+        std::string ID = "Tiles/" + names["Black"];
+        TextureManager::LoadByID(inRenderer, ID, (std::string)path, (std::string)names["Black"]);
+    }
+    */  
+}
+
 void Game::Render(Renderer& inRenderer)
 {
-    Color BGColor = Color(200, 50, 50, 255);
+    Color BGColor = Color(245, 245, 220, 255);
     inRenderer.RenderBackGround(BGColor);
-    /* Clicking Testing
-    int cont = 0;
-    for (auto& obj : GameObjectsList) {
-        obj.Render(inRenderer);
-        cont +=1;
-    }
-    */
+
     GameBoard.Render(inRenderer);
     // Render one texture    
 

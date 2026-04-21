@@ -3,17 +3,20 @@
 #include <SDL3/SDL.h>
 #include <string>
 
+#include "Core/CoreStructs.hpp"
 
-class Texture
+class Sprite
 {
 public:
-    Texture(std::string inPath,std::string file_name, int inWidth, int inHeight, SDL_Texture* inTexture);
-    ~Texture();
+    Sprite(std::string inPath,std::string file_name, int inWidth, int inHeight, SDL_Texture* inTexture);
+    ~Sprite();
 
     std::string path;
     std::string file_name;
     int TEXTURE_WIDTH = 0;
     int TEXTURE_HEIGHT = 0;
+
+    FRect sprite_FRect;
 
     SDL_Texture* Get() const{ return SDLtexture; }
 

@@ -3,7 +3,10 @@
 #include <SDL3/SDL_pixels.h>
 #include <string>
 
+#include "Core/Graphic/TextureManager.hpp"
+#include "Core/Graphic/Sprite.hpp"
 #include "Core/CoreStructs.hpp"
+
 
 class Renderer{
 
@@ -17,7 +20,8 @@ public:
 
     Renderer();
     bool PreInit();
-    bool Init(SDL_Window *window, WindowData inWindowData);
+    //bool Init(SDL_Window *window, WindowData inWindowData);
+    SDL_Window* Init(WindowData inWindowData);
 
     void Clear();
     void Present();
@@ -38,5 +42,8 @@ public:
     //bool DrawTexture(FRect inRect, char* inFilePath,  char* inFileName);
     bool DrawTexture(std::string name);
     
+    //bool DrawSprite(Sprite* inSprite);
+    bool DrawSprite(Sprite* inSprite, Area2D inArea2D);
+
     void Destroy();
 };

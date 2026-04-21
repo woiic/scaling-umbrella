@@ -1,0 +1,16 @@
+{
+    "Sprites":{
+        "Tiles":{
+                "sprite_folder":"assets/Sprites/",
+                "sprite_names":{"White":"white_tile.png",
+                                "Black":"black_tile.png"
+                                }
+            },
+        "Pieces":{
+                "pieces_folder":"assets/Sprites/",
+                "pieces_names":{"White":"white_pawn.png",
+                                "Black":"black_pawn.png"
+                                }
+            }
+    }
+}

@@ -16,18 +16,23 @@ public:
     Board();
     std::vector<std::unique_ptr<Tile>> TilesBoard;
     
-    int TILE_WIDTH = 16;
-    int TILE_HEIGHT = 16;
+    int TILE_WIDTH = 65;
+    int TILE_HEIGHT = 65;
 
     int boardWidth;
     int boardHeight;
     void InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int inTileHeight);
 
     Tile* getTile(int i, int j){
-        return TilesBoard[i * boardWidth + j].get();
+        if(i < 0 || j < 0 ) return nullptr;
+        if(i * boardWidth + j < TilesBoard.size())
+        {
+            return TilesBoard[i * boardWidth + j].get();
+        }
+        return nullptr;
     }
     
-    std::vector<Piece*> PiecesList;
+    std::vector<std::unique_ptr<Piece>> PiecesList;
 
 
     void InitPieces();

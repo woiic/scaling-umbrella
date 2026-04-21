@@ -3,8 +3,7 @@
 
 #include <cstring>
 #include "Core/CoreEnums.hpp"
-#include "Core/Graphic/TextureManager.hpp"
-#include "Core/Graphic/Texture.hpp"
+
 
 #include "Renderer.hpp"
 
@@ -21,14 +20,22 @@ bool Renderer::PreInit()
     return 1;
 }
 
-bool Renderer::Init(SDL_Window *window, WindowData inWindowData)
+//bool Renderer::Init(SDL_Window *window, WindowData inWindowData)
+SDL_Window* Renderer::Init(WindowData inWindowData)
 {
-    if (!SDL_CreateWindowAndRenderer("examples/renderer/rectangles", inWindowData.width, inWindowData.height, SDL_WINDOW_RESIZABLE, &window, &SDLRenderer)) {
+    SDL_Window* window;
+    if (!SDL_CreateWindowAndRenderer(
+        "examples/renderer/rectangles",
+        inWindowData.width,
+        inWindowData.height,
+        SDL_WINDOW_RESIZABLE,
+        &window,
+        &SDLRenderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
-        return false;
+        return nullptr;
     }
     SDL_SetRenderLogicalPresentation(SDLRenderer, inWindowData.width, inWindowData.height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
-    return true;
+    return window;
 }
 
 void Renderer::Clear()
@@ -60,7 +67,7 @@ bool Renderer::DrawGeometry(Color inColor, FGeometry inRect)
 
 bool Renderer::DrawTexture(std::string name)
 {
-    Texture* tempTexture = TextureManager::Get(name);
+    Sprite* tempTexture = TextureManager::Get(name);
     if(!tempTexture)
     {
         std::cerr << "Textures amount: " << TextureManager::Count() << std::endl;
@@ -76,6 +83,26 @@ bool Renderer::DrawTexture(std::string name)
     };
     SDL_RenderTexture(SDLRenderer, tempTexture->Get(), NULL, &tempRect);
     return true;
+}
+
+//bool Renderer::DrawSprite(Sprite* inSprite)
+bool Renderer::DrawSprite(Sprite* inSprite, Area2D inArea2D)
+{
+    if (!inSprite)
+    {
+        std::cerr << "Textures amount: " << TextureManager::Count() << std::endl;
+        std::cerr << "Texture error: " << SDL_GetError() << std::endl;
+        return false;
+    }
+    SDL_FRect tempRect
+    {
+        tempRect.x=inArea2D.position.x,
+        tempRect.y=inArea2D.position.y,
+        tempRect.w=(float)inSprite->sprite_FRect.w,
+        tempRect.h=(float)inSprite->sprite_FRect.h
+    };
+    SDL_RenderTexture(SDLRenderer, inSprite->Get(), NULL, &tempRect);
+    return false;
 }
 
 //void Renderer::RenderBackGround(SDL_Color inColor)
