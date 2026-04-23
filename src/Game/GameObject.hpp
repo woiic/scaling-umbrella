@@ -1,4 +1,6 @@
 #pragma once
+
+#include "CommonHeader.hpp"
 #include "Math/MathUtils.hpp"
 #include "Core/CoreStructs.hpp"
 
@@ -19,7 +21,7 @@ public:
 
     virtual void Render(Renderer& inRenderer);
 
-    void Update(MouseState inMouseState, float deltaTime);
+    virtual void Update(MouseState inMouseState, float deltaTime);
     void setArea2D(Area2D inArea2D);
 
 

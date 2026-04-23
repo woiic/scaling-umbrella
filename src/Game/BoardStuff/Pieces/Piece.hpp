@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Core/CoreStructs.hpp"
-
 #include "Game/GameObject.hpp"
+
+#include "Game/CommonHeader.hpp"
 
 enum Team {
     NoTeam=0,
@@ -31,6 +32,7 @@ public:
     IPoint position;
     PieceType pieceType=PieceType::PAWN;
 
+    void Update(MouseState inMouseState, float deltaTime) override;
     void Render(Renderer& inRenderer) override;
     //PlayerController *PlayerOwner;
     //Team pieceOwnerTeam

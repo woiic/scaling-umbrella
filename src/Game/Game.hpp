@@ -8,6 +8,7 @@
 #include "Core/Graphic/TextureManager.hpp"
 #include "Core/Graphic/Renderer.hpp"
 
+#include "CommonHeader.hpp"
 #include "GameObject.hpp"
 #include "GameEnums.hpp"
 #include "BoardStuff/Board.hpp"

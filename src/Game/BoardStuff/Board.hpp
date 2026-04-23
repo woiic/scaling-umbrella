@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Game/CommonHeader.hpp"
-//#include "Game/GameObject.hpp"
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
