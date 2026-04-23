@@ -187,6 +187,14 @@ struct Area2D{
         height = inHeight;
         color = inColor;
     }
+
+    bool IsMouseOver(const FPoint& mousePos) const {
+        return mousePos.x >= position.x && 
+               mousePos.x <= position.x + width &&
+               mousePos.y >= position.y && 
+               mousePos.y <= position.y + height;
+    }
+
     std::string to_string() const {
     return "Area2D{ pos=(" + position.to_string() + ")"
         + ", w=" + std::to_string(width)

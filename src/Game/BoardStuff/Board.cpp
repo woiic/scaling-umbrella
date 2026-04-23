@@ -8,6 +8,25 @@ Board::Board()
     
 }
 
+void Board::Update(MouseState inMouseState, float deltaTime)
+{
+    for (auto& t : TilesBoard)
+    {
+        if(t)
+        {
+            t->Update(inMouseState, deltaTime);
+        }
+    }
+
+    for (auto& p : PiecesList)
+    {
+        if (p) 
+        {
+            p->Update(inMouseState, deltaTime);
+        }
+    }
+}
+
 /*
     |
     Height
@@ -190,7 +209,6 @@ void Board::Render(Renderer& inRenderer)
             //p->Render(inRenderer);
             p->RenderSprite(inRenderer);
         }
-        
     }
     
     return ;

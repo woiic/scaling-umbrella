@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 #include "Core/Graphic/Renderer.hpp"
 #include "Core/Graphic/TextureManager.hpp"
@@ -12,9 +13,22 @@ GameObject::GameObject()
     ObjectSprite = nullptr;
 }
 
-void GameObject::Update(float deltaTime)
+void GameObject::Update(MouseState inMouseState, float deltaTime)
 {
-    
+    if (ObjectArea2D.IsMouseOver(inMouseState.mousePosition))
+    {
+        // Tocar/Tomar pieza (to be determined)
+        if (inMouseState.bIsLeftJustPressed)
+        {
+            std::cout << "objecto clickeado" << std::endl;
+            return ;
+        }
+        if (inMouseState.bIsLeftJustReleased)
+        {
+            std::cout << "objecto des-clickeado" << std::endl;
+            return ;
+        }
+    }
 }
 
 void GameObject::Render(Renderer& inRenderer)

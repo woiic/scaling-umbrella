@@ -64,6 +64,8 @@ void Game::Update(MouseState inMouseState, float deltaTime)
         break;
     }
     
+    GameBoard.Update(inMouseState, deltaTime);
+
     /*
     if (inMouseState.bIsLeftJustPressed) LeftIsJustPressed(inMouseState);
     if (inMouseState.bIsLeftHeld) LeftIsHeld(inMouseState);

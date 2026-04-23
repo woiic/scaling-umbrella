@@ -14,6 +14,8 @@ class Board{
 public:
     
     Board();
+
+    void Update(MouseState inMouseState, float deltaTime);
     std::vector<std::unique_ptr<Tile>> TilesBoard;
     
     int TILE_WIDTH = 65;//65;
