@@ -15,12 +15,14 @@ void Game::Start(Renderer& inRenderer)
 {
     GameObjectsList = std::vector<GameObject>();
     LastGameState = GameState::None;
-    ActualGameState = GameState::Initializing;//GameState::Start;
-    //LoadTextures(inRenderer);
+    ActualGameState = GameState::Initializing;
+
+    LastTurnState = TurnsState::NONE;
+    ActualTurnState = TurnsState::NONE;
     LoadSprites(inRenderer);
 }
 
-void Game::Update(MouseState inMouseState) 
+void Game::Update(MouseState inMouseState, float deltaTime) 
 {
     switch (ActualGameState)
     {
@@ -30,8 +32,6 @@ void Game::Update(MouseState inMouseState)
         {
             // Init Board
             
-            //GameBoard.InitBoard(8, 8, 16, 16);
-            //GameBoard.InitPieces();
             LastGameState = ActualGameState;
         }
         ActualGameState = GameState::Start;
@@ -46,6 +46,9 @@ void Game::Update(MouseState inMouseState)
 
             LastGameState = ActualGameState;
             ActualGameState = GameState::InGame;
+
+            LastTurnState = TurnsState::NONE;
+            ActualTurnState = TurnsState::White;
         }
         break;
     
@@ -92,11 +95,6 @@ void Game::LeftIsJustReleased(MouseState inMouseState)
 }
 */
 
-//void Game::LoadTextures()
-void Game::LoadTextures(Renderer& inRenderer)
-{
-    TextureManager::Load(inRenderer, "assets/Sprites/", "64xMan.png");
-}
 
 void Game::LoadSprites(Renderer& inRenderer)
 {

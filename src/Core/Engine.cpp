@@ -40,7 +40,7 @@ void Engine::Run(Game& inGame) {
 
         MouseState mouseState = HandleEvents();
         Update(deltaTime);
-        inGame.Update(mouseState);
+        inGame.Update(mouseState, deltaTime);
 
         Render(&inGame);
         SDL_Delay(16);  // ~60 FPS

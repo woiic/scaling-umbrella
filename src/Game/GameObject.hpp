@@ -19,6 +19,7 @@ public:
 
     virtual void Render(Renderer& inRenderer);
 
+    void Update(float deltaTime);
     void setArea2D(Area2D inArea2D);
 
 

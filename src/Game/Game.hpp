@@ -25,16 +25,14 @@ public:
     void Start(Renderer& inRenderer);
     //void Start();
 
-    void Update(MouseState mouseState);
+    void Update(MouseState mouseState, float deltaTime);
     /*
     void LeftIsJustPressed(MouseState inMouseState);
     void LeftIsHeld(MouseState inMouseState);
     void LeftIsJustReleased(MouseState inMouseState);
     */
-    void LoadTextures(Renderer& inRenderer);
 
     void LoadSprites(Renderer& inRenderer);
-    //void LoadTextures();
     
     void Render(Renderer &inRenderer);
 

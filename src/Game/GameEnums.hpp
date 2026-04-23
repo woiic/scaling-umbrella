@@ -11,7 +11,7 @@ enum GameState
 
 enum TurnsState
 {
-    None=0,
+    NONE=0,
     PreTurn,
     White,
     Black,

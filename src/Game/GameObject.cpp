@@ -12,6 +12,11 @@ GameObject::GameObject()
     ObjectSprite = nullptr;
 }
 
+void GameObject::Update(float deltaTime)
+{
+    
+}
+
 void GameObject::Render(Renderer& inRenderer)
 {
     if (ObjectArea2D)
