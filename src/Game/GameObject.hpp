@@ -21,7 +21,10 @@ public:
 
     void setArea2D(Area2D inArea2D);
 
+
 public:
-// testing only
+
     void RenderSprite(Renderer& inRenderer);
+    IPoint GetSpriteWH();
+
 };

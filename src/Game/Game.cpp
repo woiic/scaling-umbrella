@@ -8,7 +8,6 @@ Game::Game()
 
 Game::~Game() 
 {
-    //Shutdown();
 }
 
 //void Game::Start()
@@ -46,9 +45,18 @@ void Game::Update(MouseState inMouseState)
             GameBoard.InitPieces();
 
             LastGameState = ActualGameState;
+            ActualGameState = GameState::InGame;
         }
         break;
     
+    case GameState::InGame:
+        if (ActualGameState != LastGameState) //First frame check
+        {
+            
+            LastGameState = ActualGameState;
+        }
+
+        break;
     default:
         break;
     }
@@ -99,6 +107,12 @@ void Game::LoadSprites(Renderer& inRenderer)
     TextureManager::LoadByID(inRenderer, ID, path, w_name);
     ID = "assets/Sprites/black_tile.png";
     TextureManager::LoadByID(inRenderer, ID, path, b_name);
+    ID = "assets/Sprites/black_pawn.png";
+    std::string name = "black_pawn.png";
+    TextureManager::LoadByID(inRenderer, ID, path, name);
+    ID = "assets/Sprites/white_pawn.png";
+    name = "white_pawn.png";
+    TextureManager::LoadByID(inRenderer, ID, path, name);
     /*
     auto tiles = j["Sprites"]["Tiles"];
     auto path = tiles["sprite_folder"];

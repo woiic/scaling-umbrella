@@ -46,6 +46,9 @@ public:
     GameState LastGameState;
     GameState ActualGameState;
 
+    TurnsState LastTurnState;
+    TurnsState ActualTurnState;
+
 public:
     //Specific game stuff
 

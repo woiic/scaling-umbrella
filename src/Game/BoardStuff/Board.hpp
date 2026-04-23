@@ -16,8 +16,8 @@ public:
     Board();
     std::vector<std::unique_ptr<Tile>> TilesBoard;
     
-    int TILE_WIDTH = 65;
-    int TILE_HEIGHT = 65;
+    int TILE_WIDTH = 65;//65;
+    int TILE_HEIGHT = 65;//65;
 
     int boardWidth;
     int boardHeight;

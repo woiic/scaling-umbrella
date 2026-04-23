@@ -90,16 +90,16 @@ bool Renderer::DrawSprite(Sprite* inSprite, Area2D inArea2D)
 {
     if (!inSprite)
     {
-        std::cerr << "Textures amount: " << TextureManager::Count() << std::endl;
-        std::cerr << "Texture error: " << SDL_GetError() << std::endl;
+        //std::cerr << "Textures amount: " << TextureManager::Count() << std::endl;
+        //std::cerr << "Texture error: " << SDL_GetError() << std::endl;
         return false;
     }
     SDL_FRect tempRect
     {
         tempRect.x=inArea2D.position.x,
         tempRect.y=inArea2D.position.y,
-        tempRect.w=(float)inSprite->sprite_FRect.w,
-        tempRect.h=(float)inSprite->sprite_FRect.h
+        tempRect.w=(float)inSprite->TEXTURE_WIDTH,
+        tempRect.h=(float)inSprite->TEXTURE_HEIGHT
     };
     SDL_RenderTexture(SDLRenderer, inSprite->Get(), NULL, &tempRect);
     return false;

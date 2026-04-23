@@ -62,11 +62,11 @@ Sprite* TextureManager::LoadByID(Renderer &inRenderer, std::string ID, std::stri
         return nullptr;
     }
 
-    //SDL_DestroySurface(surface);
-    std::cout << "texture file name: " << std::string(name) << std::endl;
     texture = new Sprite(std::string(path), std::string(name), surface->w, surface->h, SDLtexture);
     textures[ID] = std::move(texture);
-
+    std::cout << "surface size: " << surface->w << "  " << surface->h << std::endl;
+    SDL_DestroySurface(surface);
+    
     return texture;
 }
 

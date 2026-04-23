@@ -16,8 +16,6 @@ public:
     int TEXTURE_WIDTH = 0;
     int TEXTURE_HEIGHT = 0;
 
-    FRect sprite_FRect;
-
     SDL_Texture* Get() const{ return SDLtexture; }
 
     private:

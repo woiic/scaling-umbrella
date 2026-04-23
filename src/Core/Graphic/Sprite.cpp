@@ -7,11 +7,9 @@ Sprite::Sprite(std::string inPath,std::string inFile_name, int inWidth, int inHe
 {
     path = inPath;
     file_name = inFile_name;
-    //TEXTURE_WIDTH = inWidth;
-    //TEXTURE_HEIGHT = inHeight;
+    TEXTURE_WIDTH = inWidth;
+    TEXTURE_HEIGHT = inHeight;
     SDLtexture = inTexture;
-
-    sprite_FRect = FRect(0.0f, 0.0f, (float)inWidth, (float)inHeight);
 
 }
 

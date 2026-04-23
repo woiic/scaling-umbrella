@@ -8,3 +8,12 @@ enum GameState
     InGame,
     PostGame
 };
+
+enum TurnsState
+{
+    None=0,
+    PreTurn,
+    White,
+    Black,
+    PostTurn
+};

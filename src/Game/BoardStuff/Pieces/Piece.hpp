@@ -5,8 +5,9 @@
 #include "Game/GameObject.hpp"
 
 enum Team {
-    White=0,
-    Black
+    NoTeam=0,
+    WHITE,
+    BLACK
 };
 
 enum PieceType{
@@ -14,7 +15,7 @@ enum PieceType{
     PAWN,
     BISHOP,
     KNIGHT,
-    TOWER,
+    ROOK,
     QUEEN,
     KING
 };
@@ -24,6 +25,8 @@ public:
     
     Piece();
     Piece(IPoint inPosition, PieceType inPieceType);
+
+    Team pieceTeam;
 
     IPoint position;
     PieceType pieceType=PieceType::PAWN;

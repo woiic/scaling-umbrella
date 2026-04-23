@@ -26,6 +26,12 @@ void GameObject::RenderSprite(Renderer& inRenderer)
     inRenderer.DrawSprite(ObjectSprite, ObjectArea2D);
 }
 
+IPoint GameObject::GetSpriteWH()
+    {
+        if (!ObjectSprite) return IPoint(0, 0);
+        return IPoint(ObjectSprite->TEXTURE_WIDTH, ObjectSprite->TEXTURE_HEIGHT);
+    }
+
 void GameObject::setArea2D(Area2D inArea2D)
 {
     ObjectArea2D = inArea2D;

@@ -30,8 +30,6 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
             std::unique_ptr<Tile> ptr = std::make_unique<Tile>(IPoint(i, j), this);
 
             Color c;
-            //if ((i+j)%2 == 0) c = Color(255,255,255);
-            //else c = Color(0,0,0);
             if ((i+j)%2 == 0) ptr->ObjectSprite = TextureManager::Get("assets/Sprites/white_tile.png");
             else ptr->ObjectSprite = TextureManager::Get("assets/Sprites/black_tile.png");
             Area2D tempArea2D = Area2D(FPoint((float)(j*TILE_WIDTH), (float)(i*TILE_HEIGHT)),
@@ -78,11 +76,25 @@ bool Board::AddPieces(json inJson){
         {
             std::string pieceName = piece.get<std::string>();
             std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
+            //newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/black_tile.png");
             if (!newPiece) {
                 std::cout << "Piece problem" << std::endl;
                 column++;
                 continue;
             }
+            std::transform(pieceName.begin(), pieceName.end(), pieceName.begin(),
+                [](unsigned char c){ return std::tolower(c); });
+
+            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/white_" + pieceName + ".png" );
+            newPiece->pieceTeam = Team::WHITE;
+            Color c = Color();
+            FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
+                                     (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            Area2D tempArea2D = Area2D(piecePos,
+                                        (float)TILE_WIDTH,
+                                        (float)TILE_HEIGHT,
+                                        c);
+            newPiece->setArea2D(tempArea2D);
             
             Piece* ptr = newPiece.get();
             // Add piece to the board
@@ -106,11 +118,25 @@ bool Board::AddPieces(json inJson){
         {
             std::string pieceName = piece.get<std::string>();
             std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
+
             if (!newPiece) {
                 std::cout << "Piece problem" << std::endl;
                 column++;
                 continue;
             }
+
+            std::transform(pieceName.begin(), pieceName.end(), pieceName.begin(),
+                [](unsigned char c){ return std::tolower(c); });
+            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/black_" + pieceName + ".png" );
+            newPiece->pieceTeam = Team::BLACK;
+            Color c = Color();
+            FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
+                                     (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            Area2D tempArea2D = Area2D(piecePos,
+                                        (float)TILE_WIDTH,
+                                        (float)TILE_HEIGHT,
+                                        c);
+            newPiece->setArea2D(tempArea2D);
 
             Piece* ptr = newPiece.get();
             // Add piece to the board
@@ -136,7 +162,7 @@ std::unique_ptr<Piece> Board::CreatePiece(IPoint inPos, const std::string& name)
     if (name == "Pawn")     return std::make_unique<Piece>(inPos, PieceType::PAWN);
     if (name == "Bishop")   return std::make_unique<Piece>(inPos, PieceType::BISHOP);
     if (name == "Knight")   return std::make_unique<Piece>(inPos, PieceType::KNIGHT);
-    if (name == "Tower")    return std::make_unique<Piece>(inPos, PieceType::TOWER);
+    if (name == "ROOK")    return std::make_unique<Piece>(inPos, PieceType::ROOK);
     if (name == "Queen")    return std::make_unique<Piece>(inPos, PieceType::QUEEN);
     if (name == "King")     return std::make_unique<Piece>(inPos, PieceType::KING);
 
@@ -161,7 +187,8 @@ void Board::Render(Renderer& inRenderer)
     {
         if (p) 
         {
-            p->Render(inRenderer);
+            //p->Render(inRenderer);
+            p->RenderSprite(inRenderer);
         }
         
     }
