@@ -18,8 +18,20 @@ enum PieceType{
     KNIGHT,
     ROOK,
     QUEEN,
-    KING
+    KING,
 };
+
+static std::string PieceTypeToString(PieceType type) {
+    switch (type) {
+    case PieceType::PAWN:   return "pawn";
+    case PieceType::BISHOP: return "bishop";
+    case PieceType::KNIGHT: return "knight";
+    case PieceType::ROOK:   return "rook";
+    case PieceType::QUEEN:  return "queen";
+    case PieceType::KING:   return "king";
+    default:                return "Unknown";
+    }
+}
 
 class Piece : public GameObject{
 public:

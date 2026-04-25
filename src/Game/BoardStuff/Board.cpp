@@ -104,6 +104,7 @@ bool Board::AddPieces(json inJson){
             std::transform(pieceName.begin(), pieceName.end(), pieceName.begin(),
                 [](unsigned char c){ return std::tolower(c); });
 
+            LOG_DEBUG(pieceName);
             newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/white_" + pieceName + ".png" );
             newPiece->pieceTeam = Team::WHITE;
             Color c = Color();

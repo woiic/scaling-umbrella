@@ -100,6 +100,7 @@ void Game::LeftIsJustReleased(MouseState inMouseState)
 
 void Game::LoadSprites(Renderer& inRenderer)
 {
+    /*
     std::string ID = "assets/Sprites/white_tile.png";
     std::string path = "assets/Sprites/";
     std::string w_name = "white_tile.png";
@@ -113,26 +114,37 @@ void Game::LoadSprites(Renderer& inRenderer)
     ID = "assets/Sprites/white_pawn.png";
     name = "white_pawn.png";
     TextureManager::LoadByID(inRenderer, ID, path, name);
-    /*
-    auto tiles = j["Sprites"]["Tiles"];
-    auto path = tiles["sprite_folder"];
-    auto names = tiles["sprite_names"];
+    */
+    std::string path = "assets/Sprites/";
+    std::string w_prefix = "white_";
+    std::string b_prefix = "black_";
+    std::string w_name = "white_tile.png";
+    std::string b_name = "black_tile.png";
+    std::string ID = "assets/Sprites/white_tile.png";
+    TextureManager::LoadByID(inRenderer, ID, path, w_name);
+    ID = "assets/Sprites/black_tile.png";
+    TextureManager::LoadByID(inRenderer, ID, path, b_name);
+    std::string name;
     
-    std::cout << names["White"] << std::endl;
-    std::cout << path << std::endl;
-    if (names["White"].is_string() && path.is_string())
-    {
-        std::string ID = "Tiles/" + names["White"];
-        TextureManager::LoadByID(inRenderer, ID, (std::string)path, (std::string)names["White"]);
-    }
-    std::cout << names["Black"] << std::endl;
-    std::cout << path << std::endl;
-    if (names["Black"].is_string() && path.is_string())
-    {
-        std::string ID = "Tiles/" + names["Black"];
-        TextureManager::LoadByID(inRenderer, ID, (std::string)path, (std::string)names["Black"]);
-    }
-    */  
+    name = PieceTypeToString(PieceType::PAWN) + ".png"; 
+    TextureManager::LoadByID(inRenderer, path + w_prefix + name, path, w_prefix + name);
+    TextureManager::LoadByID(inRenderer, path + b_prefix + name, path, b_prefix + name);
+    name = PieceTypeToString(PieceType::BISHOP) + ".png"; 
+    TextureManager::LoadByID(inRenderer, path + w_prefix + name, path, w_prefix + name);
+    TextureManager::LoadByID(inRenderer, path + b_prefix + name, path, b_prefix + name);
+    name = PieceTypeToString(PieceType::KNIGHT) + ".png"; 
+    TextureManager::LoadByID(inRenderer, path + w_prefix + name, path, w_prefix + name);
+    TextureManager::LoadByID(inRenderer, path + b_prefix + name, path, b_prefix + name);
+    name = PieceTypeToString(PieceType::ROOK) + ".png"; 
+    TextureManager::LoadByID(inRenderer, path + w_prefix + name, path, w_prefix + name);
+    TextureManager::LoadByID(inRenderer, path + b_prefix + name, path, b_prefix + name);
+    name = PieceTypeToString(PieceType::QUEEN) + ".png"; 
+    TextureManager::LoadByID(inRenderer, path + w_prefix + name, path, w_prefix + name);
+    TextureManager::LoadByID(inRenderer, path + b_prefix + name, path, b_prefix + name);
+    name = PieceTypeToString(PieceType::KING) + ".png"; 
+    TextureManager::LoadByID(inRenderer, path + w_prefix + name, path, w_prefix + name);
+    TextureManager::LoadByID(inRenderer, path + b_prefix + name, path, b_prefix + name);
+
 }
 
 void Game::Render(Renderer& inRenderer)
