@@ -17,4 +17,5 @@ class InputHandler
     void HandleMouseEvent(const SDL_Event& event);
     bool bEventThisFrame = false;
 
+    void Destroy();
 };

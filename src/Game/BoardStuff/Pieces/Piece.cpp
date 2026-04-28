@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/DEBUG/Logger.hpp"
+#include "Game/BoardStuff/Board.hpp"
 #include "Piece.hpp"
 
 Piece::Piece()
@@ -26,13 +27,28 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
         if (inMouseState.bIsLeftJustPressed)
         {
             LOG_DEBUG("objecto clickeado");
+            bIsFollowingMouse = true;
+            boardRef->SetActivePiece(this);
             return ;
+        }
+        if (inMouseState.bIsLeftHeld && bIsFollowingMouse)
+        {
+            ObjectArea2D.position = inMouseState.mousePosition;    
         }
         if (inMouseState.bIsLeftJustReleased)
         {
             LOG_DEBUG("objecto des-clickeado");
+            bIsFollowingMouse = false;
+            //boardRef->SetActivePiece(nullptr);
             return ;
         }
+    }
+
+    if (bIsFollowingMouse)
+    {
+        FPoint temp = (FPoint)GetSpriteWH();
+        FPoint fixedPos = inMouseState.mousePosition - temp/2.0f;
+        ObjectArea2D.position = fixedPos;
     }
 }
 

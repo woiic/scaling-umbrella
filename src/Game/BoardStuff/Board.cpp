@@ -95,7 +95,10 @@ bool Board::AddPieces(json inJson){
         {
             std::string pieceName = piece.get<std::string>();
             std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
-            //newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/black_tile.png");
+            
+            // ensure piece knows its board so callbacks or queries are safe
+            if (newPiece) newPiece->boardRef = this;
+            
             if (!newPiece) {
                 std::cout << "Piece problem" << std::endl;
                 column++;
@@ -138,6 +141,8 @@ bool Board::AddPieces(json inJson){
         {
             std::string pieceName = piece.get<std::string>();
             std::unique_ptr<Piece> newPiece = CreatePiece(IPoint(column, row), pieceName);
+            // ensure piece knows its board so callbacks or queries are safe
+            if (newPiece) newPiece->boardRef = this;
 
             if (!newPiece) {
                 std::cout << "Piece problem" << std::endl;
@@ -213,4 +218,9 @@ void Board::Render(Renderer& inRenderer)
     }
     
     return ;
+}
+
+void Board::SetActivePiece(Piece* inPiece)
+{
+    activePiece = inPiece;
 }

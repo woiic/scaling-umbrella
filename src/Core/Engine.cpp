@@ -2,6 +2,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_video.h>
 #include "Input/InputHandler.hpp"
+#include "Core/Graphic/TextureManager.hpp"
 
 #include "Game/Game.hpp"
 #include "Engine.hpp"
@@ -14,14 +15,26 @@ Engine::~Engine() {
     Shutdown();
 }
 
-bool Engine::Init(const char* title, int width, int height) {
-
+bool Engine::Init(const char* title, int width, int height) 
+{
     WindowData newWindowData = WindowData(title, width, height);
+
     renderer = new Renderer();
-    renderer->PreInit();
+    if(!renderer->PreInit())
+    {
+        delete renderer;
+        renderer = nullptr;
+        return false;
+    }
     //renderer->Init(window, newWindowData);
     window = renderer->Init(newWindowData);
-   
+    if (!window) {
+        renderer->Destroy();
+        delete renderer;
+        renderer = nullptr;
+        SDL_Quit();
+        return false;
+    }
     inputHandler = new InputHandler();
     running = true;
     return true;
@@ -50,6 +63,7 @@ MouseState Engine::HandleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_EVENT_QUIT) {
+            LOG_DEBUG("cerrando la ventana");
             running = false;
         }
         else inputHandler->HandleMouseEvent(event);
@@ -72,9 +86,13 @@ void Engine::Render(Game *inGame)
 }
 
 void Engine::Shutdown() {
+    running = false;
+    TextureManager::Clear();
+
     if (renderer) {
         //SDL_DestroyRenderer(renderer);
         renderer->Destroy();
+        delete renderer;
         renderer = nullptr;
     }
 
@@ -88,7 +106,9 @@ void Engine::Shutdown() {
     }
 
     if (inputHandler)
-    {
+    {   
+        inputHandler->Destroy();
+        delete inputHandler;
         inputHandler = nullptr;
     }
 

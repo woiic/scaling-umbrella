@@ -5,6 +5,8 @@
 
 #include "Game/CommonHeader.hpp"
 
+class Board;
+
 enum Team {
     NoTeam=0,
     WHITE,
@@ -39,7 +41,11 @@ public:
     Piece();
     Piece(IPoint inPosition, PieceType inPieceType);
 
+    Board* boardRef;
+
     Team pieceTeam;
+
+    bool bIsFollowingMouse = false;
 
     IPoint position;
     PieceType pieceType=PieceType::PAWN;

@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+struct FPoint;
+
 struct IPoint
 {
     int x=0;
@@ -17,6 +19,8 @@ struct IPoint
         x = a;
         y = b;
     }
+
+    operator FPoint() const;
 
     std::string to_string() const {
         return "x: " + std::to_string(x) + ", " + "y: " + std::to_string(y);
@@ -59,7 +63,16 @@ struct FPoint
     FPoint operator-(const FPoint& other) const {
         return { x - other.x, y - other.y };
     }
+
+    FPoint operator/(const float divider) const {
+        if (divider == 0) return FPoint();
+        return { x / divider, y / divider };
+    }
 };
+
+inline IPoint::operator FPoint() const {
+    return { static_cast<float>(x), static_cast<float>(y) };
+}
 
 struct MouseState{
     FPoint mousePosition;

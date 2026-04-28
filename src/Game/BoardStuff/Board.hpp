@@ -16,7 +16,10 @@ public:
 
     void Update(MouseState inMouseState, float deltaTime);
     std::vector<std::unique_ptr<Tile>> TilesBoard;
-    
+    Piece* activePiece = nullptr;
+    Tile* sourceTile = nullptr;
+    Tile* hoverTile = nullptr;
+
     int TILE_WIDTH = 65;//65;
     int TILE_HEIGHT = 65;//65;
 
@@ -35,6 +38,7 @@ public:
     
     std::vector<std::unique_ptr<Piece>> PiecesList;
 
+    // Rendering
 
     void InitPieces();
     bool AddPieces(json inJson);
@@ -42,6 +46,10 @@ public:
 
     void TestRender(Renderer& inRenderer);
     void Render(Renderer& inRenderer);
+
+    // Game handling
+
+    void SetActivePiece(Piece* inPiece);
 
 private:
 

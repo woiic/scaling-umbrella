@@ -62,3 +62,8 @@ void InputHandler::HandleMouseEvent(const SDL_Event& event) {
         }
     }
 }
+
+void InputHandler::Destroy()
+{
+    
+}

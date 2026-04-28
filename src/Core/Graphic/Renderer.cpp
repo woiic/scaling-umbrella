@@ -15,9 +15,9 @@ bool Renderer::PreInit()
 {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         std::cerr << "SDL_Init failed: " << SDL_GetError() << std::endl;
-        return 1;
+        return false;
     }
-    return 1;
+    return true;
 }
 
 //bool Renderer::Init(SDL_Window *window, WindowData inWindowData)

@@ -19,15 +19,11 @@ public:
 
     static Sprite* Get(const std::string& name);
     static size_t Count();
-
-/*
+    
     static void Clear();
 
 private:
-    static std::unordered_map<std::string, Texture*> textures;
-*/
-private:
 
     static std::unordered_map<std::string,Sprite*> textures;
-    //static std::unordered_map<int,Texture*> texturesBUp;
+    
 };
