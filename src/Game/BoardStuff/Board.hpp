@@ -27,15 +27,10 @@ public:
     int boardHeight;
     void InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int inTileHeight);
 
-    Tile* getTile(int i, int j){
-        if(i < 0 || j < 0 ) return nullptr;
-        if(i * boardWidth + j < TilesBoard.size())
-        {
-            return TilesBoard[i * boardWidth + j].get();
-        }
-        return nullptr;
-    }
+    Tile* getTile(int i, int j);
     
+    Tile* getTile(IPoint inPos);
+
     std::vector<std::unique_ptr<Piece>> PiecesList;
 
     // Rendering
@@ -50,6 +45,11 @@ public:
     // Game handling
 
     void SetActivePiece(Piece* inPiece);
+
+    void FreePieceTile(IPoint tilePos);
+
+    void SetSourceTile(Tile* inTile);
+    void SetHoverTile(Tile* inTile);
 
 private:
 

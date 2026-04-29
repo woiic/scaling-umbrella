@@ -33,6 +33,10 @@ struct IPoint
     IPoint operator-(const IPoint& other) const {
         return { x - other.x, y - other.y };
     }
+
+    IPoint operator*(const IPoint& other) const {
+        return { x * other.x, y * other.y };
+    }
 };
 
 struct FPoint
@@ -64,10 +68,20 @@ struct FPoint
         return { x - other.x, y - other.y };
     }
 
+    FPoint operator*(const FPoint& other) const {
+        return { x * other.x, y * other.y };
+    }
+
     FPoint operator/(const float divider) const {
         if (divider == 0) return FPoint();
         return { x / divider, y / divider };
     }
+
+    FPoint operator/(const FPoint &other) const {
+        if (other.x == 0 || other.y == 0) return FPoint();
+        return { x / other.x, y / other.y };
+    }
+
 };
 
 inline IPoint::operator FPoint() const {

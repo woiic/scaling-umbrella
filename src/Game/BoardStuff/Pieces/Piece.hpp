@@ -55,4 +55,11 @@ public:
     //PlayerController *PlayerOwner;
     //Team pieceOwnerTeam
 
+    // gameplay stuff
+
+    void SetPosition(IPoint inPos);
+
+    void FreePositionTile();
+    void UpdateArea2DPosition();
+
 };

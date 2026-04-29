@@ -46,7 +46,7 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
         for(int j=0; j<inBoardWidth; j++)
         {
             //Tile newTile = Tile(FPoint(i, j), this);
-            std::unique_ptr<Tile> ptr = std::make_unique<Tile>(IPoint(i, j), this);
+            std::unique_ptr<Tile> ptr = std::make_unique<Tile>(IPoint(j, i), this);
 
             Color c;
             if ((i+j)%2 == 0) ptr->ObjectSprite = TextureManager::Get("assets/Sprites/white_tile.png");
@@ -56,7 +56,6 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
                                         (float)TILE_HEIGHT,
                                         c);
             ptr->setArea2D(tempArea2D);
-
             TilesBoard.push_back(std::move(ptr));
         }   
     }
@@ -118,10 +117,11 @@ bool Board::AddPieces(json inJson){
                                         (float)TILE_HEIGHT,
                                         c);
             newPiece->setArea2D(tempArea2D);
-            
+            newPiece->position = IPoint(column, row);
+
             Piece* ptr = newPiece.get();
             // Add piece to the board
-            Tile* tile = getTile(row, column);
+            Tile* tile = getTile(column, row);
             if (!tile) {
                 std::cout << "Tile problem" << std::endl;
                 column++;
@@ -165,7 +165,7 @@ bool Board::AddPieces(json inJson){
 
             Piece* ptr = newPiece.get();
             // Add piece to the board
-            Tile* tile = getTile(row, column);
+            Tile* tile = getTile(column, row);
             if (!tile) {
                 std::cout << "Tile problem" << std::endl;
                 column++;
@@ -220,7 +220,43 @@ void Board::Render(Renderer& inRenderer)
     return ;
 }
 
+Tile* Board::getTile(int i, int j)
+{
+    if(i < 0 || j < 0 ) return nullptr;
+    if(i + j * boardWidth < TilesBoard.size())
+    {
+        return TilesBoard[i + j * boardWidth].get();
+    }
+    return nullptr;
+    }
+    
+Tile* Board::getTile(IPoint inPos)
+{
+    if(inPos.x < 0 || inPos.y < 0 ) return nullptr;
+    if(inPos.x + inPos.y * boardWidth < TilesBoard.size())
+    {
+        return TilesBoard[inPos.x + inPos.y * boardWidth].get();
+    }
+    return nullptr;
+}
+
 void Board::SetActivePiece(Piece* inPiece)
 {
     activePiece = inPiece;
+}
+
+void Board::FreePieceTile(IPoint tilePos)
+{
+    LOG_DEBUG("Tile liberado" + tilePos.to_string());
+    getTile(tilePos)->AssignedPiece = nullptr;
+}
+
+void Board::SetSourceTile(Tile* inTile)
+{
+    sourceTile = inTile;
+}
+
+void Board::SetHoverTile(Tile* inTile)
+{
+    hoverTile = inTile;
 }
