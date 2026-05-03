@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BoardEnums.hpp"
 #include "Game/CommonHeader.hpp"
 
 #include <nlohmann/json.hpp>
@@ -13,6 +14,8 @@ class Board{
 public:
     
     Board();
+
+    //-------- Core game stuff
 
     void Update(MouseState inMouseState, float deltaTime);
     std::vector<std::unique_ptr<Tile>> TilesBoard;
@@ -33,7 +36,7 @@ public:
 
     std::vector<std::unique_ptr<Piece>> PiecesList;
 
-    // Rendering
+    //-------- Rendering
 
     void InitPieces();
     bool AddPieces(json inJson);
@@ -42,7 +45,7 @@ public:
     void TestRender(Renderer& inRenderer);
     void Render(Renderer& inRenderer);
 
-    // Game handling
+    //-------- Game handling
 
     void SetActivePiece(Piece* inPiece);
 
@@ -50,6 +53,11 @@ public:
 
     void SetSourceTile(Tile* inTile);
     void SetHoverTile(Tile* inTile);
+
+    // Moves handling
+
+    MoveResult VerifyMove(Piece* movingPiece, IPoint finalPosition);
+    bool IsPointInBoard(IPoint finalPosition);
 
 private:
 

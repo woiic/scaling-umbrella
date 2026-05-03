@@ -27,7 +27,9 @@ public:
 
 public:
 
-    void RenderSprite(Renderer& inRenderer);
+    virtual void RenderSprite(Renderer& inRenderer);
+    void RenderCustomSprite(Renderer& inRenderer, Sprite* inSprite, Area2D inArea2D);
+
     IPoint GetSpriteWH();
 
 };

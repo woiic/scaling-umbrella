@@ -17,7 +17,10 @@ public:
     Board *boardRef = nullptr;
 
     void Update(MouseState inMouseState, float deltaTime) override;
+    // SEMI DEPRECATED
     void Render(Renderer& inRenderer) override;
+
+    void RenderSprite(Renderer& inRenderer) override;
 
 public:
 

@@ -260,3 +260,35 @@ void Board::SetHoverTile(Tile* inTile)
 {
     hoverTile = inTile;
 }
+
+MoveResult Board::VerifyMove(Piece* movingPiece, IPoint finalPosition)
+{
+    if (!IsPointInBoard(finalPosition))
+    {
+        return MoveResult::NON_POSSIBLE;    
+    }
+    if (getTile(finalPosition)->AssignedPiece)
+    {
+        Piece* tempPiece = getTile(finalPosition)->AssignedPiece;
+        if (tempPiece)
+        {
+            if (tempPiece->pieceTeam == movingPiece->pieceTeam) return MoveResult::NON_POSSIBLE;
+            else return MoveResult::CAPTURE;
+        }
+        return MoveResult::MOVEMENT;    
+    }
+
+    return MoveResult::MOVEMENT;
+}
+
+bool Board::IsPointInBoard(IPoint finalPosition)
+{
+    if (boardWidth > finalPosition.x && boardHeight > finalPosition.y)
+    {
+        if (finalPosition.x >= 0 && finalPosition.y >= 0)
+        {
+            return true;
+        }
+    }
+    return false;
+}

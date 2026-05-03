@@ -16,8 +16,8 @@ enum Team {
 enum PieceType{
     NoPiece=0,
     PAWN,
-    BISHOP,
     KNIGHT,
+    BISHOP,
     ROOK,
     QUEEN,
     KING,
@@ -35,6 +35,15 @@ static std::string PieceTypeToString(PieceType type) {
     }
 }
 
+static std::string TeamToString(Team type) {
+    switch (type) {
+    case Team::NoTeam:   return "No team";
+    case Team::WHITE:    return "white";
+    case Team::BLACK:    return "black";
+    default:             return "No team";
+    }
+}
+
 class Piece : public GameObject{
 public:
     
@@ -47,8 +56,10 @@ public:
 
     bool bIsFollowingMouse = false;
 
+    // position relative to the board
     IPoint position;
     PieceType pieceType=PieceType::PAWN;
+
 
     void Update(MouseState inMouseState, float deltaTime) override;
     void Render(Renderer& inRenderer) override;
@@ -58,8 +69,15 @@ public:
     // gameplay stuff
 
     void SetPosition(IPoint inPos);
+    void MovePiece();
 
     void FreePositionTile();
     void UpdateArea2DPosition();
+
+    std::vector<IPoint> posiblePositions;
+    bool bIsInStartingPosition;
+
+    //std::vector<IPoint> GetPossibleMoves();
+    std::vector<IPoint> GetMovesByBehaviour();
 
 };

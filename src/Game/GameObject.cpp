@@ -31,6 +31,11 @@ void GameObject::RenderSprite(Renderer& inRenderer)
     inRenderer.DrawSprite(ObjectSprite, ObjectArea2D);
 }
 
+void GameObject::RenderCustomSprite(Renderer& inRenderer, Sprite* inSprite, Area2D inArea2D)
+{
+    inRenderer.DrawSprite(inSprite, inArea2D);
+}
+
 IPoint GameObject::GetSpriteWH()
     {
         if (!ObjectSprite) return IPoint(0, 0);

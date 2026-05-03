@@ -37,7 +37,16 @@ struct IPoint
     IPoint operator*(const IPoint& other) const {
         return { x * other.x, y * other.y };
     }
+
+    IPoint operator*(int mult) const {
+        return { x * mult, y * mult };
+    }    
 };
+
+inline IPoint operator*(int mult, const IPoint& point)
+{    
+    return point * mult;
+}
 
 struct FPoint
 {
@@ -70,6 +79,10 @@ struct FPoint
 
     FPoint operator*(const FPoint& other) const {
         return { x * other.x, y * other.y };
+    }
+
+    FPoint operator*(const float mult) const {
+        return { x * mult, y * mult };
     }
 
     FPoint operator/(const float divider) const {
