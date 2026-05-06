@@ -1,6 +1,11 @@
-# scaling-umbrella
+# Scaling-Umbrella
 
-A small C++ game/engine project using CMake and vcpkg for dependency management. Provides core engine pieces (Engine, Renderer, InputHandler, GameLogic) and the example entry in `src/main.cpp`.
+A small C++ game/engine project for learning C++ and have some code for my job search. I made it using CMake and vcpkg for dependency management. This project Provides core engine pieces (Engine, Renderer, InputHandler, GameLogic) for 2D strategy games (tabletop games) and the example entry in `src/main.cpp`.
+
+## What have I learned
+
+To this day, I have learned a lot of C++, the diferences between Unreal Engine C++ and pure are clear, Unreal aids you a lot without you noticing and having to do everything by hand makes you notice it all.
+I also have learn first hand the importance of planning ahead and having a log of my advances and achivements, the first one so I have at least a structure for the features I'm adding and not add stuff I don't need or let my code be hard to extend in the future when adding new features, and the second one to allways know what I have to do and what I have done, and to have a way to remind myself how much I have worked so far.
 
 ## Features
 - Simple modular engine structure
