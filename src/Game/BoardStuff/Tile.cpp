@@ -35,22 +35,9 @@ void Tile::Update(MouseState inMouseState, float deltaTime)
     {
         boardRef->SetHoverTile(this);
         
-        if (inMouseState.bIsLeftJustReleased)
+        if (inMouseState.bIsLeftJustReleased && boardRef->activePiece)
         {
-            if(!AssignedPiece)
-            {
-                LOG_DEBUG("actualizada la pieza 1");
-                Piece* tempPointer = boardRef->activePiece;
-                if(tempPointer) 
-                {
-                    LOG_DEBUG("actualizada la pieza 2");
-                    LOG_DEBUG(position.to_string());
-
-                    boardRef->FreePieceTile(tempPointer->position);                    
-                    tempPointer->SetPosition(position);
-                    AssignedPiece = tempPointer;
-                }
-            }
+            boardRef->TryToMovePiece(this);
             return ;
         }
     }

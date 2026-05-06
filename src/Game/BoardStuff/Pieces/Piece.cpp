@@ -30,12 +30,13 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
             LOG_DEBUG(TeamToString(pieceTeam));
             bIsFollowingMouse = true;
             boardRef->SetActivePiece(this);
-            std::vector<IPoint> tempPoints = GetMovesByBehaviour();
+            posiblePositions = GetMovesByBehaviour();
 
-            for (auto i : tempPoints)
+            for (auto i : posiblePositions)
             {
                 LOG_DEBUG(i.to_string());
             }
+            
 
             return ;
         }
@@ -45,8 +46,8 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
         }
         if (inMouseState.bIsLeftJustReleased)
         {
-            MovePiece();
-            
+            // moved to the board
+            //MovePiece();            
         }
     }
 
@@ -69,21 +70,19 @@ void Piece::SetPosition(IPoint inPos)
     position = inPos;
 }
 
-/*
-func movePiece(piece: Piece, targetPosition: Vector2i) -> void:
-	if targetPosition in Behaviour.getPosibleMoves(piece,self):
-		var oldPosition = piece.boardPos
-		boardPieces[oldPosition.x][oldPosition.y] = null
-		var oldPiece = boardPieces[targetPosition.x][targetPosition.y]
-		if oldPiece != null:
-			# call a destroy or something
-			handleDestroy(oldPiece)
-		boardPieces[targetPosition.x][targetPosition.y] = piece
-		piece.setPosition(targetPosition)
-*/
-void Piece::MovePiece()
+
+void Piece::MovePiece(bool bIsValidMovemente)
 {
-    LOG_DEBUG("objecto des-clickeado");
+    if(bIsValidMovemente)
+    {
+        if(bIsInStartingPosition) bIsInStartingPosition = false;
+        LOG_DEBUG("objecto des-clickeado");
+        bIsFollowingMouse = false;
+        boardRef->SetActivePiece(nullptr);
+
+        UpdateArea2DPosition();
+        return ;
+    }
     bIsFollowingMouse = false;
     boardRef->SetActivePiece(nullptr);
 
@@ -119,7 +118,7 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
 
         if (bIsInStartingPosition && boardRef->VerifyMove(this, position + 2 * forward) == MoveResult::MOVEMENT)
         {
-            points.push_back(position + forward);
+            points.push_back(position + 2 * forward);
         }
         if (boardRef->VerifyMove(this, position + forward + IPoint(1, 0)) == MoveResult::CAPTURE) 
         {
@@ -130,6 +129,18 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
             points.push_back(position + forward + IPoint(-1, 0));
         }
 
+        // TODO: check enpassant 
+        // MYB make the moving pawn notify the board-> PAWN's so they know they can do ENPASSANT and where to
+        /*
+        if (boardRef->VerifySpecialMove(this, position + IPoint(1, 0), MoveResult::EN_PASSANT) == MoveResult::EN_PASSANT)
+        {
+            points.push_back(position +IPoint(1, 0));
+        }
+        if (boardRef->VerifySpecialMove(this, position + IPoint(-1, 0), MoveResult::EN_PASSANT) == MoveResult::EN_PASSANT)
+        {
+            points.push_back(position +IPoint(-1, 0));
+        }
+        */
         break;
     }
     case PieceType::KNIGHT:

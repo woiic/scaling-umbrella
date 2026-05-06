@@ -280,6 +280,37 @@ MoveResult Board::VerifyMove(Piece* movingPiece, IPoint finalPosition)
 
     return MoveResult::MOVEMENT;
 }
+//TODO: CHECK EN PASSANT (probably an improved move system IPoint -> Moves )
+MoveResult Board::VerifySpecialMove(Piece* movingPiece, IPoint finalPosition, MoveResult expectedMoveResult)
+{
+    if (!IsPointInBoard(finalPosition))
+    {
+        return MoveResult::NON_POSSIBLE;    
+    }
+    if (getTile(finalPosition)->AssignedPiece)
+    {
+        // EN PASSANT
+        Piece* tempPiece = getTile(finalPosition)->AssignedPiece;
+        if (movingPiece->pieceType == PieceType::PAWN)
+        {
+            if (tempPiece && tempPiece->pieceType == PieceType::PAWN)
+            {
+                if (tempPiece->pieceTeam == movingPiece->pieceTeam && tempPiece->bHasMoved2Tiles) // has made a 2 tiles move
+                {
+                    //
+                }
+            }
+        }
+        if (tempPiece)
+        {
+            if (tempPiece->pieceTeam == movingPiece->pieceTeam) return MoveResult::NON_POSSIBLE;
+            else return MoveResult::CAPTURE;
+        }
+        return MoveResult::MOVEMENT;    
+    }
+
+    return MoveResult::MOVEMENT;
+}
 
 bool Board::IsPointInBoard(IPoint finalPosition)
 {
@@ -291,4 +322,31 @@ bool Board::IsPointInBoard(IPoint finalPosition)
         }
     }
     return false;
+}
+bool Board::TryToMovePiece(Tile* inTile)
+{
+    if (!activePiece || !inTile) return false;
+    if (activePiece->posiblePositions.empty()) return false;
+
+    const auto& vec = activePiece->posiblePositions;
+    if (std::find(vec.begin(), vec.end(), inTile->position) == vec.end()) 
+    {
+
+        activePiece->MovePiece(false); // return piece to "spawn"
+        return false;
+    }
+
+    LOG_DEBUG("Tile a modificar");
+    LOG_DEBUG(inTile->position.to_string());
+    FreePieceTile(activePiece->position); // Removes the pointer from Tile 1
+    LOG_DEBUG("Tile liberado");
+    activePiece->SetPosition(inTile->position); // Sets Piece new position
+    LOG_DEBUG("Piece Tile changed");
+    inTile->AssignedPiece = activePiece; //assigns the Piece to Tile 2
+    LOG_DEBUG("Piece Tile setted");
+
+    activePiece->MovePiece(true); // Sets the "world" position to the center of the Tile
+
+    return true;
+    
 }

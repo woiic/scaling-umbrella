@@ -69,13 +69,14 @@ public:
     // gameplay stuff
 
     void SetPosition(IPoint inPos);
-    void MovePiece();
+    void MovePiece(bool bIsValidMovemente);
 
     void FreePositionTile();
     void UpdateArea2DPosition();
 
     std::vector<IPoint> posiblePositions;
     bool bIsInStartingPosition;
+    bool bHasMoved2Tiles = false;
 
     //std::vector<IPoint> GetPossibleMoves();
     std::vector<IPoint> GetMovesByBehaviour();

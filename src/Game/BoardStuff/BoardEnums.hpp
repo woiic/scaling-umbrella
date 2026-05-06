@@ -6,5 +6,6 @@ enum MoveResult
     CAPTURE,
     MOVEMENT,
     NON_POSSIBLE,
+    EN_PASSANT,
 
 };

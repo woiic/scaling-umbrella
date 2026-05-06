@@ -3,6 +3,7 @@
 #include "BoardEnums.hpp"
 #include "Game/CommonHeader.hpp"
 
+#include <algorithm>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -57,7 +58,9 @@ public:
     // Moves handling
 
     MoveResult VerifyMove(Piece* movingPiece, IPoint finalPosition);
+    MoveResult VerifySpecialMove(Piece* movingPiece, IPoint finalPosition, MoveResult expectedMoveResult);
     bool IsPointInBoard(IPoint finalPosition);
+    bool TryToMovePiece(Tile* inTile);
 
 private:
 

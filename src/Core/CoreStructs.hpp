@@ -2,6 +2,7 @@
 #include <string>
 
 struct FPoint;
+struct Move;
 
 struct IPoint
 {
@@ -40,7 +41,12 @@ struct IPoint
 
     IPoint operator*(int mult) const {
         return { x * mult, y * mult };
-    }    
+    }
+
+    bool operator==(const IPoint& other) const {
+        return ((x == other.x) && (y == other.y ));
+    }
+
 };
 
 inline IPoint operator*(int mult, const IPoint& point)
@@ -95,11 +101,29 @@ struct FPoint
         return { x / other.x, y / other.y };
     }
 
+    bool operator==(const IPoint& other) const {
+        return ((x == other.x) && (y == other.y ));
+    }
 };
 
 inline IPoint::operator FPoint() const {
     return { static_cast<float>(x), static_cast<float>(y) };
 }
+
+struct MoveData
+{
+    IPoint originalPosition;
+    IPoint finalPosition;
+    // add Path at some point for more complex typesof pieces
+    // MoveType Flag?
+
+    MoveData()
+    {
+        originalPosition = IPoint();
+        finalPosition = IPoint();
+    }
+
+};
 
 struct MouseState{
     FPoint mousePosition;
