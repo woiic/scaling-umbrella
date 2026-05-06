@@ -10,26 +10,8 @@ A small C++ game/engine project using CMake and vcpkg for dependency management.
 
 ## Prerequisites
 - CMake (3.25+ recommended)
-- Ninja (recommended) or Visual Studio (matching generator)
+- Visual Studio 
 - vcpkg (optional, referenced by `CMakePresets.json`)
-
-## Quick build (recommended: Ninja + presets)
-Configure (Debug):
-```bash
-cmake --preset default
-```
-Build:
-```bash
-cmake --build --preset default
-```
-
-If you prefer Visual Studio generators, run CMake with the appropriate `-G` option that matches your installed Visual Studio version (for example `-G "Visual Studio 17 2022"`).
-
-## Run
-After building, run the produced executable from the build directory, for example:
-```powershell
-.\build\Debug\SCALING_UMBRELLA.exe
-```
 
 ## Getting started
 
@@ -73,9 +55,24 @@ cmake --preset default
 cmake --build --preset default
 ```
 
-Notes:
-- `x64-windows` triplet is used above; if you use MinGW toolchain with vcpkg, you may need a corresponding triplet (e.g., `x64-mingw-dynamic`) and to set `CMAKE_TOOLCHAIN_FILE` appropriately.
-- If by "mynsw" you meant a different compiler/package, tell me the exact name and I will add tailored install steps.
+
+## Quick build (recommended: Ninja + presets)
+Configure (Debug):
+```bash
+cmake --preset default
+```
+Build:
+```bash
+cmake --build --preset default
+```
+
+If you prefer Visual Studio generators, run CMake with the appropriate `-G` option that matches your installed Visual Studio version (for example `-G "Visual Studio 17 2022"`).
+
+## Run
+After building, run the produced executable from the build directory, for example:
+```powershell
+.\build\Debug\SCALING_UMBRELLA.exe
+```
 
 ## Project layout
 - `CMakeLists.txt` — top-level CMake config
