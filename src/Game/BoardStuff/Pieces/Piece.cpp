@@ -23,6 +23,9 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
 {
     if (ObjectArea2D.IsMouseOver(inMouseState.mousePosition))
     {
+        // skip if this is not the active piece
+        if (boardRef->activePiece && boardRef->activePiece != this) return;
+        
         // Tocar/Tomar pieza (to be determined)
         if (inMouseState.bIsLeftJustPressed)
         {
@@ -49,7 +52,10 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
             if (boardRef->activePiece == this)
             {
                 LOG_DEBUG("pieza");
-                boardRef->MovePiece();
+                if (!boardRef->MovePiece()) // problem with the move
+                {
+                    MovePiece(false);
+                }
             }
         }
     }

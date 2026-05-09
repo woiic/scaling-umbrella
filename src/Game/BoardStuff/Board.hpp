@@ -36,6 +36,7 @@ public:
     Tile* getTile(IPoint inPos);
 
     std::vector<std::unique_ptr<Piece>> PiecesList;
+    std::vector<std::unique_ptr<Piece>> TakenPiecesList;
 
     //-------- Rendering
 
