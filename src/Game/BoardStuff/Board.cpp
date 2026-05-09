@@ -333,25 +333,40 @@ bool Board::IsPointInBoard(IPoint finalPosition)
 
 bool Board::MovePiece()
 {
+    if (!hoverTile) return false;
     return TryToMovePiece(hoverTile);
 }
 
+// here inTile can be raplaced with hoverTile
 bool Board::TryToMovePiece(Tile* inTile)
 {
     if (!activePiece || !inTile) return false;
     if (activePiece->posiblePositions.empty()) return false;
-    if (! hoverTile) return false;
 
     const auto& vec = activePiece->posiblePositions;
     if (std::find(vec.begin(), vec.end(), inTile->position) == vec.end()) 
     {
-
-        activePiece->MovePiece(false); // return piece to "spawn"
+        //activePiece->MovePiece(false); // return piece to "spawn"
         return false;
     }
 
-    // Check for a piece to be taken - Pieces of the same Team are ignored on the GetMovesPart()
+    // Check for a piece to be taken - Pieces of the same Team are ignored at GetMovesByBehaviour()
+    if (inTile && inTile->AssignedPiece)
+    {
+        Piece* capturedPiece = inTile->AssignedPiece;
+        auto it = std::find_if(PiecesList.begin(), PiecesList.end(),
+            [capturedPiece](const std::unique_ptr<Piece>& p) { 
+                return p.get() == capturedPiece; 
+        });
+        
+        if (it != PiecesList.end())
+        {
+            TakenPiecesList.push_back(std::move(*it));
+            PiecesList.erase(it);
+            inTile->AssignedPiece = nullptr;
+        }
 
+    }
     //
 
     LOG_DEBUG("Tile a modificar");
