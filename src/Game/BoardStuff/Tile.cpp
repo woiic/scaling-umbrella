@@ -34,12 +34,14 @@ void Tile::Update(MouseState inMouseState, float deltaTime)
     if (ObjectArea2D.IsMouseOver(inMouseState.mousePosition))
     {
         boardRef->SetHoverTile(this);
-        
+
+        /* Moved to Piece.cpp
         if (inMouseState.bIsLeftJustReleased && boardRef->activePiece)
         {
             boardRef->TryToMovePiece(this);
             return ;
         }
+        */
     }
     return ;
 }

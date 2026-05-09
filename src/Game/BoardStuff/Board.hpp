@@ -60,6 +60,8 @@ public:
     MoveResult VerifyMove(Piece* movingPiece, IPoint finalPosition);
     MoveResult VerifySpecialMove(Piece* movingPiece, IPoint finalPosition, MoveResult expectedMoveResult);
     bool IsPointInBoard(IPoint finalPosition);
+
+    bool MovePiece(); // intermediate point for testing
     bool TryToMovePiece(Tile* inTile);
 
 private:

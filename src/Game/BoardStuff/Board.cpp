@@ -25,6 +25,13 @@ void Board::Update(MouseState inMouseState, float deltaTime)
             p->Update(inMouseState, deltaTime);
         }
     }
+
+    // check for checks
+
+    // check if End Game has been reached
+
+    // change player controller
+
 }
 
 /*
@@ -323,10 +330,17 @@ bool Board::IsPointInBoard(IPoint finalPosition)
     }
     return false;
 }
+
+bool Board::MovePiece()
+{
+    return TryToMovePiece(hoverTile);
+}
+
 bool Board::TryToMovePiece(Tile* inTile)
 {
     if (!activePiece || !inTile) return false;
     if (activePiece->posiblePositions.empty()) return false;
+    if (! hoverTile) return false;
 
     const auto& vec = activePiece->posiblePositions;
     if (std::find(vec.begin(), vec.end(), inTile->position) == vec.end()) 
@@ -335,6 +349,10 @@ bool Board::TryToMovePiece(Tile* inTile)
         activePiece->MovePiece(false); // return piece to "spawn"
         return false;
     }
+
+    // Check for a piece to be taken - Pieces of the same Team are ignored on the GetMovesPart()
+
+    //
 
     LOG_DEBUG("Tile a modificar");
     LOG_DEBUG(inTile->position.to_string());

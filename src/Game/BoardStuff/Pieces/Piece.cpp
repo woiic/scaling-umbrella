@@ -36,7 +36,6 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
             {
                 LOG_DEBUG(i.to_string());
             }
-            
 
             return ;
         }
@@ -47,7 +46,11 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
         if (inMouseState.bIsLeftJustReleased)
         {
             // moved to the board
-            //MovePiece();            
+            if (boardRef->activePiece == this)
+            {
+                LOG_DEBUG("pieza");
+                boardRef->MovePiece();
+            }
         }
     }
 
