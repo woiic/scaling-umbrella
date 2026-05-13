@@ -7,6 +7,8 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
+#include "Game/GameObject.hpp"
+#include "Game/TextBlock.hpp"
 #include "Pieces/Piece.hpp"
 #include "Tile.hpp"
 
@@ -15,6 +17,7 @@ class Board{
 public:
     
     Board();
+    ~Board();
 
     //-------- Core game stuff
 
@@ -63,6 +66,11 @@ public:
 
     bool MovePiece(); // intermediate point for testing
     bool TryToMovePiece(Tile* inTile);
+
+    // extrastuff
+
+    std::vector<Text*> textsList;
+    TextBlock* testTextBlock = nullptr;
 
 private:
 

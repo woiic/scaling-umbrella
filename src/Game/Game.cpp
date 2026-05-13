@@ -20,6 +20,7 @@ void Game::Start(Renderer& inRenderer)
     LastTurnState = TurnsState::NONE;
     ActualTurnState = TurnsState::NONE;
     LoadSprites(inRenderer);
+    LoadTexts(inRenderer);
 }
 
 void Game::Update(MouseState inMouseState, float deltaTime) 
@@ -147,12 +148,17 @@ void Game::LoadSprites(Renderer& inRenderer)
 
 }
 
+void Game::LoadTexts(Renderer& inRenderer)
+{
+    Color color = Color(120, 120, 120, 255);
+    TextureManager::LoadTextByID(inRenderer, "test", "", "", color);
+}
+
 void Game::Render(Renderer& inRenderer)
 {
     Color BGColor = Color(245, 245, 220, 255);
     inRenderer.RenderBackGround(BGColor);
 
     GameBoard.Render(inRenderer);
-    // Render one texture    
 
 }

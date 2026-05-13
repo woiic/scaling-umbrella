@@ -1,10 +1,13 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_pixels.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include <string>
 
+#include "Core/DEBUG/Logger.hpp"
 #include "Core/Graphic/TextureManager.hpp"
 #include "Core/Graphic/Sprite.hpp"
+#include "Core/Graphic/Text.hpp"
 #include "Core/CoreStructs.hpp"
 
 
@@ -20,8 +23,12 @@ public:
 
     Renderer();
     bool PreInit();
-    //bool Init(SDL_Window *window, WindowData inWindowData);
+    
     SDL_Window* Init(WindowData inWindowData);
+
+public:
+
+    // Sprites and renders
 
     void Clear();
     void Present();
@@ -38,12 +45,19 @@ public:
     void DrawRect(Color inColor, FRect inRect);
     bool DrawGeometry(Color inColor, FGeometry inRect);
     
-    //bool DrawTexture(FRect inRect, const char* inFilePath,  const char* inFileName);
-    //bool DrawTexture(FRect inRect, char* inFilePath,  char* inFileName);
-    bool DrawTexture(std::string name);
-    
-    //bool DrawSprite(Sprite* inSprite);
     bool DrawSprite(Sprite* inSprite, Area2D inArea2D);
+
+    bool DrawText(Text* inText, Area2D inArea2D);
+
+public:
+    // text stuff 
+    bool InitText();
+
+    TTF_Font* GetFont() {return mFont; }
+
+    TTF_Font *mFont = nullptr;
+
+public:
 
     void Destroy();
 };

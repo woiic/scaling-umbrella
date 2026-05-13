@@ -35,7 +35,30 @@ SDL_Window* Renderer::Init(WindowData inWindowData)
         return nullptr;
     }
     SDL_SetRenderLogicalPresentation(SDLRenderer, inWindowData.width, inWindowData.height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    InitText();
+    
     return window;
+}
+
+bool Renderer::InitText()
+{
+
+    if (!TTF_Init()) {
+        LOG_ERROR("TTF_Init failed: ");
+        LOG_ERROR(SDL_GetError());    
+        return false;
+    }
+
+        /* Open the font */
+
+    mFont = TTF_OpenFont("assets/Fonts/Arial_Black.ttf", 16.0f);
+    if (!mFont)
+    {
+        LOG_ERROR("TTF font failed to load");
+        return false;
+    }
+    
+    return true;
 }
 
 void Renderer::Clear()
@@ -65,32 +88,12 @@ bool Renderer::DrawGeometry(Color inColor, FGeometry inRect)
     return true;
 }
 
-bool Renderer::DrawTexture(std::string name)
-{
-    Sprite* tempTexture = TextureManager::Get(name);
-    if(!tempTexture)
-    {
-        std::cerr << "Textures amount: " << TextureManager::Count() << std::endl;
-        std::cerr << "Texture error: " << SDL_GetError() << std::endl;
-        return false;
-    }
-    SDL_FRect tempRect
-    {
-        tempRect.x=0.0f,
-        tempRect.y=0.0f,
-        tempRect.w=(float)tempTexture->TEXTURE_WIDTH,
-        tempRect.h=(float)tempTexture->TEXTURE_WIDTH
-    };
-    SDL_RenderTexture(SDLRenderer, tempTexture->Get(), NULL, &tempRect);
-    return true;
-}
-
 //bool Renderer::DrawSprite(Sprite* inSprite)
 bool Renderer::DrawSprite(Sprite* inSprite, Area2D inArea2D)
 {
     if (!inSprite)
     {
-        //std::cerr << "Textures amount: " << TextureManager::Count() << std::endl;
+        //std::cerr << "Textures amount: " << TextureManager::CountSprites() << std::endl;
         //std::cerr << "Texture error: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -102,7 +105,25 @@ bool Renderer::DrawSprite(Sprite* inSprite, Area2D inArea2D)
         tempRect.h=(float)inSprite->TEXTURE_HEIGHT
     };
     SDL_RenderTexture(SDLRenderer, inSprite->Get(), NULL, &tempRect);
-    return false;
+    return true;
+}
+
+bool Renderer::DrawText(Text* inText, Area2D inArea2D)
+{
+    
+    if (!inText)
+    {
+        return false;
+    }
+    SDL_FRect tempRect
+    {
+        tempRect.x=inArea2D.position.x,
+        tempRect.y=inArea2D.position.y,
+        tempRect.w=(float)inText->TEXT_WIDTH,
+        tempRect.h=(float)inText->TEXT_HEIGHT
+    };
+    SDL_RenderTexture(SDLRenderer, inText->Get(), NULL, &tempRect);
+    return true;
 }
 
 //void Renderer::RenderBackGround(SDL_Color inColor)

@@ -1,11 +1,17 @@
 #pragma once
 
 #include "Core/Graphic/TextureManager.hpp"
+#include "Core/Graphic/Text.hpp"
 #include "Board.hpp"
 
 Board::Board()
 {
     
+}
+
+Board::~Board()
+{
+
 }
 
 void Board::Update(MouseState inMouseState, float deltaTime)
@@ -56,8 +62,8 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
             std::unique_ptr<Tile> ptr = std::make_unique<Tile>(IPoint(j, i), this);
 
             Color c;
-            if ((i+j)%2 == 0) ptr->ObjectSprite = TextureManager::Get("assets/Sprites/white_tile.png");
-            else ptr->ObjectSprite = TextureManager::Get("assets/Sprites/black_tile.png");
+            if ((i+j)%2 == 0) ptr->ObjectSprite = TextureManager::GetSprite("assets/Sprites/white_tile.png");
+            else ptr->ObjectSprite = TextureManager::GetSprite("assets/Sprites/black_tile.png");
             Area2D tempArea2D = Area2D(FPoint((float)(j*TILE_WIDTH), (float)(i*TILE_HEIGHT)),
                                         (float)TILE_WIDTH,
                                         (float)TILE_HEIGHT,
@@ -66,7 +72,17 @@ void Board::InitBoard(int inBoardWidth, int inBoardHeight, int inTileWidth, int 
             TilesBoard.push_back(std::move(ptr));
         }   
     }
-    
+
+    // Show some text
+    if (true)
+    {
+        Text* txt = TextureManager::GetText("test");
+        testTextBlock = new TextBlock();
+        testTextBlock->SetText(txt);
+        Area2D tArea = Area2D(FPoint(8*TILE_WIDTH + 12.0f, 12.0f), 100, 50, Color());
+        testTextBlock->setArea2D(tArea);
+        textsList.push_back(txt);
+    }
 }
 
 void Board::InitPieces()
@@ -114,7 +130,7 @@ bool Board::AddPieces(json inJson){
                 [](unsigned char c){ return std::tolower(c); });
 
             LOG_DEBUG(pieceName);
-            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/white_" + pieceName + ".png" );
+            newPiece->ObjectSprite = TextureManager::GetSprite("assets/Sprites/white_" + pieceName + ".png" );
             newPiece->pieceTeam = Team::WHITE;
             Color c = Color();
             FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
@@ -159,7 +175,7 @@ bool Board::AddPieces(json inJson){
 
             std::transform(pieceName.begin(), pieceName.end(), pieceName.begin(),
                 [](unsigned char c){ return std::tolower(c); });
-            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/black_" + pieceName + ".png" );
+            newPiece->ObjectSprite = TextureManager::GetSprite("assets/Sprites/black_" + pieceName + ".png" );
             newPiece->pieceTeam = Team::BLACK;
             Color c = Color();
             FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
@@ -223,6 +239,9 @@ void Board::Render(Renderer& inRenderer)
             p->RenderSprite(inRenderer);
         }
     }
+
+    // for testing
+    if(testTextBlock) testTextBlock->RenderText(inRenderer);
     
     return ;
 }
