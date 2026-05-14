@@ -79,7 +79,9 @@ Sprite* TextureManager::Get(const std::string& name)
 {
     auto it = textures.find(name);
     if (it != textures.end()) {
-        return it->second;
+        //return it->second;
+        auto s = it->second;
+        return new Sprite(s->path, s->file_name, s->TEXTURE_WIDTH, s->TEXTURE_HEIGHT, s->Get());
     }
     return nullptr;
 }

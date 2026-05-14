@@ -13,6 +13,12 @@ GameObject::GameObject()
     ObjectSprite = nullptr;
 }
 
+GameObject::~GameObject()
+{
+    delete ObjectSprite;
+    ObjectSprite = nullptr;
+}
+
 void GameObject::Update(MouseState inMouseState, float deltaTime)
 {
 }

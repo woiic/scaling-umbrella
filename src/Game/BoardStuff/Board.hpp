@@ -15,6 +15,7 @@ class Board{
 public:
     
     Board();
+    ~Board();
 
     //-------- Core game stuff
 

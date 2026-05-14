@@ -21,6 +21,11 @@ Piece::Piece(IPoint inPosition, PieceType inPieceType)
 
 }
 
+Piece::~Piece()
+{
+    boardRef = nullptr;
+}
+
 void Piece::Update(MouseState inMouseState, float deltaTime)
 {
     if (ObjectArea2D.IsMouseOver(inMouseState.mousePosition))

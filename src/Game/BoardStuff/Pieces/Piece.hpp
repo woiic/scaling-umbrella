@@ -51,6 +51,8 @@ public:
     Piece();
     Piece(IPoint inPosition, PieceType inPieceType);
 
+    ~Piece();
+
     Board* boardRef;
 
     Team pieceTeam;
