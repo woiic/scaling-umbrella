@@ -13,6 +13,12 @@ public:
 
     std::string path;
     std::string file_name;
+
+    FPoint relativePosition;
+
+    void SetRelativePosition(FPoint inPoint) {relativePosition = inPoint; }
+    void SetRelativePosition(IPoint inPoint) {relativePosition = inPoint; }
+
     int TEXTURE_WIDTH = 0;
     int TEXTURE_HEIGHT = 0;
 

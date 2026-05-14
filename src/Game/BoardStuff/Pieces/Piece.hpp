@@ -5,6 +5,7 @@
 
 #include "Game/CommonHeader.hpp"
 
+class Sprite;
 class Board;
 
 enum Team {
@@ -70,6 +71,10 @@ public:
 
     void SetPosition(IPoint inPos);
     void MovePiece(bool bIsValidMovemente);
+
+    void SetSpriteRelativePosition(FPoint inPoint);
+    void SetSpriteRelativePosition(IPoint inPoint);
+
 
     void FreePositionTile();
     void UpdateArea2DPosition();
