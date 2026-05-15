@@ -1,4 +1,8 @@
 #pragma once
+
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_pixels.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include <string>
 
 struct FPoint;
@@ -188,6 +192,11 @@ struct Color{
         g=inG;
         b=inB;
         a=inA;
+    }
+
+    SDL_Color GetSDLColor() const {
+        SDL_Color color = { (Uint8)r, (Uint8)g, (Uint8)b, (Uint8)a };
+        return color;
     }
 };
 /*

@@ -34,6 +34,7 @@ public:
     */
 
     void LoadSprites(Renderer& inRenderer);
+    void LoadTexts(Renderer& inRenderer);
     
     void Render(Renderer &inRenderer);
 
