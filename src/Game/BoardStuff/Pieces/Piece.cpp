@@ -2,6 +2,8 @@
 
 #include "Core/DEBUG/Logger.hpp"
 #include "Game/BoardStuff/Board.hpp"
+#include "Core/Graphic/Sprite.hpp"
+
 #include "Piece.hpp"
 
 Piece::Piece()
@@ -19,10 +21,18 @@ Piece::Piece(IPoint inPosition, PieceType inPieceType)
 
 }
 
+Piece::~Piece()
+{
+    boardRef = nullptr;
+}
+
 void Piece::Update(MouseState inMouseState, float deltaTime)
 {
     if (ObjectArea2D.IsMouseOver(inMouseState.mousePosition))
     {
+        // skip if this is not the active piece
+        if (boardRef->activePiece && boardRef->activePiece != this) return;
+        
         // Tocar/Tomar pieza (to be determined)
         if (inMouseState.bIsLeftJustPressed)
         {
@@ -49,7 +59,10 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
             if (boardRef->activePiece == this)
             {
                 LOG_DEBUG("pieza");
-                boardRef->MovePiece();
+                if (!boardRef->MovePiece()) // problem with the move
+                {
+                    MovePiece(false);
+                }
             }
         }
     }
@@ -57,7 +70,7 @@ void Piece::Update(MouseState inMouseState, float deltaTime)
     if (bIsFollowingMouse)
     {
         FPoint temp = (FPoint)GetSpriteWH();
-        FPoint fixedPos = inMouseState.mousePosition - temp/2.0f;
+        FPoint fixedPos = inMouseState.mousePosition - temp;
         ObjectArea2D.position = fixedPos;
     }
 }
@@ -93,6 +106,21 @@ void Piece::MovePiece(bool bIsValidMovemente)
     return ;
 }
 
+void Piece::SetSpriteRelativePosition(FPoint inPoint)
+{
+    if (ObjectSprite)
+    {
+        ObjectSprite->SetRelativePosition(inPoint);
+    }
+}
+void Piece::SetSpriteRelativePosition(IPoint inPoint)
+{
+    if (ObjectSprite)
+    {
+        ObjectSprite->SetRelativePosition(inPoint);
+    }
+}
+
 void Piece::FreePositionTile()
 {
     boardRef->FreePieceTile(position);
@@ -100,8 +128,14 @@ void Piece::FreePositionTile()
 
 void Piece::UpdateArea2DPosition()
 {
+    /*
     FPoint temp = (FPoint)GetSpriteWH();
     FPoint fixedPos = (FPoint)(position * IPoint(boardRef->TILE_WIDTH, boardRef->TILE_HEIGHT)) + temp/2.0f;
+    LOG_DEBUG(fixedPos.to_string());
+    ObjectArea2D.position = fixedPos;
+    */
+    FPoint temp = (FPoint)GetSpriteWH();
+    FPoint fixedPos = (FPoint)(position * IPoint(boardRef->TILE_WIDTH, boardRef->TILE_HEIGHT));
     LOG_DEBUG(fixedPos.to_string());
     ObjectArea2D.position = fixedPos;
 }
@@ -171,22 +205,22 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
 
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(1 ,  1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(1 , -1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(1 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 , -1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(-1,  1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1,  1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1, -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(-1, -1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(-1, -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1, -1));
             else break;
         }
         break;
@@ -195,22 +229,22 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
     {
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(1 ,  0));
+            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  0));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(0 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(0 ,  1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(0 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(0 ,  1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(-1,  0));
+            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1,  0));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(0 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(0 , -1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(0 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(0 , -1));
             else break;
         }
         break;
@@ -219,42 +253,42 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
     {
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(1 ,  1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(1 , -1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(1 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 , -1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(-1,  1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1,  1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1, -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(-1, -1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(-1, -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1, -1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(1 ,  0));
+            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  0));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(0 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(0 ,  1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(0 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(0 ,  1));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(-1,  0));
+            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1,  0));
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(0 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + IPoint(0 , -1));
+            if (boardRef->VerifyMove(this, position + i * IPoint(0 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(0 , -1));
             else break;
         }
         break;

@@ -130,11 +130,14 @@ bool Board::AddPieces(json inJson){
                 [](unsigned char c){ return std::tolower(c); });
 
             LOG_DEBUG(pieceName);
-            newPiece->ObjectSprite = TextureManager::GetSprite("assets/Sprites/white_" + pieceName + ".png" );
+            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/white_" + pieceName + ".png" );
+            newPiece->SetSpriteRelativePosition(FPoint((TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f, (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
             newPiece->pieceTeam = Team::WHITE;
             Color c = Color();
-            FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
-                                     (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            //FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
+            //                        (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            FPoint piecePos = FPoint((float)(column*TILE_WIDTH ),
+                                     (float)(row*TILE_HEIGHT));
             Area2D tempArea2D = Area2D(piecePos,
                                         (float)TILE_WIDTH,
                                         (float)TILE_HEIGHT,
@@ -175,11 +178,15 @@ bool Board::AddPieces(json inJson){
 
             std::transform(pieceName.begin(), pieceName.end(), pieceName.begin(),
                 [](unsigned char c){ return std::tolower(c); });
-            newPiece->ObjectSprite = TextureManager::GetSprite("assets/Sprites/black_" + pieceName + ".png" );
+            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/black_" + pieceName + ".png" );
+            //newPiece->ObjectSprite->SetRelativePosition((TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f, (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f);
+            newPiece->SetSpriteRelativePosition(FPoint((TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f, (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
             newPiece->pieceTeam = Team::BLACK;
             Color c = Color();
-            FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
-                                     (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            //FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
+            //                         (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            FPoint piecePos = FPoint((float)(column*TILE_WIDTH ),
+                                     (float)(row*TILE_HEIGHT));
             Area2D tempArea2D = Area2D(piecePos,
                                         (float)TILE_WIDTH,
                                         (float)TILE_HEIGHT,
@@ -352,25 +359,40 @@ bool Board::IsPointInBoard(IPoint finalPosition)
 
 bool Board::MovePiece()
 {
+    if (!hoverTile) return false;
     return TryToMovePiece(hoverTile);
 }
 
+// here inTile can be raplaced with hoverTile
 bool Board::TryToMovePiece(Tile* inTile)
 {
     if (!activePiece || !inTile) return false;
     if (activePiece->posiblePositions.empty()) return false;
-    if (! hoverTile) return false;
 
     const auto& vec = activePiece->posiblePositions;
     if (std::find(vec.begin(), vec.end(), inTile->position) == vec.end()) 
     {
-
-        activePiece->MovePiece(false); // return piece to "spawn"
+        //activePiece->MovePiece(false); // return piece to "spawn"
         return false;
     }
 
-    // Check for a piece to be taken - Pieces of the same Team are ignored on the GetMovesPart()
+    // Check for a piece to be taken - Pieces of the same Team are ignored at GetMovesByBehaviour()
+    if (inTile && inTile->AssignedPiece)
+    {
+        Piece* capturedPiece = inTile->AssignedPiece;
+        auto it = std::find_if(PiecesList.begin(), PiecesList.end(),
+            [capturedPiece](const std::unique_ptr<Piece>& p) { 
+                return p.get() == capturedPiece; 
+        });
+        
+        if (it != PiecesList.end())
+        {
+            TakenPiecesList.push_back(std::move(*it));
+            PiecesList.erase(it);
+            inTile->AssignedPiece = nullptr;
+        }
 
+    }
     //
 
     LOG_DEBUG("Tile a modificar");

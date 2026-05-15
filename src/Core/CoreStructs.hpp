@@ -69,6 +69,12 @@ struct FPoint
         y = 0.0f;
     }
 
+    FPoint(int a, int b)
+    {
+        x = (float)a;
+        y = (float)b;
+    }
+
     FPoint(float a, float b)
     {
         x = a;

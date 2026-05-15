@@ -13,7 +13,9 @@ class GameObject
 protected:
 
 public:
+
     GameObject();
+    ~GameObject();
 
     Area2D ObjectArea2D;
     

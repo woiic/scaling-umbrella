@@ -18,3 +18,4 @@ Sprite::~Sprite() {
         SDL_DestroyTexture(SDLtexture);
     }
 }
+

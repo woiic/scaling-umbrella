@@ -13,6 +13,12 @@ GameObject::GameObject()
     ObjectSprite = nullptr;
 }
 
+GameObject::~GameObject()
+{
+    delete ObjectSprite;
+    ObjectSprite = nullptr;
+}
+
 void GameObject::Update(MouseState inMouseState, float deltaTime)
 {
 }
@@ -29,6 +35,7 @@ void GameObject::Render(Renderer& inRenderer)
 void GameObject::RenderSprite(Renderer& inRenderer)
 {
     inRenderer.DrawSprite(ObjectSprite, ObjectArea2D);
+    //inRenderer.DrawSprite(ObjectSprite, ObjectArea2D);
 }
 
 void GameObject::RenderCustomSprite(Renderer& inRenderer, Sprite* inSprite, Area2D inArea2D)
