@@ -44,10 +44,10 @@ void GameObject::RenderCustomSprite(Renderer& inRenderer, Sprite* inSprite, Area
 }
 
 IPoint GameObject::GetSpriteWH()
-    {
-        if (!ObjectSprite) return IPoint(0, 0);
-        return IPoint(ObjectSprite->TEXTURE_WIDTH, ObjectSprite->TEXTURE_HEIGHT);
-    }
+{
+    if (!ObjectSprite) return IPoint(0, 0);
+    return IPoint(ObjectSprite->TEXTURE_WIDTH, ObjectSprite->TEXTURE_HEIGHT);
+}
 
 void GameObject::setArea2D(Area2D inArea2D)
 {

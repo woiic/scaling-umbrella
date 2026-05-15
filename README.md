@@ -1,6 +1,6 @@
 # Scaling-Umbrella
 
-A small C++ game/engine project for learning C++ and have some code for my job search. I made it using CMake and vcpkg for dependency management. This project Provides core engine pieces (Engine, Renderer, InputHandler, GameLogic) for 2D strategy games (tabletop games) and the example entry in `src/main.cpp`.
+A small C++ game/engine project for learning C++ and get more experience developing software alone. Currently I'm working with CMake and vcpkg for dependency management. This project Provides core engine pieces (Engine, Renderer, InputHandler) for simple 2D games, and more speceific game logic for 2D strategy games (tabletop games) and the example entry in `src/main.cpp`.
 
 ## What have I learned
 
