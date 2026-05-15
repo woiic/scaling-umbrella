@@ -87,5 +87,6 @@ public:
 
     //std::vector<IPoint> GetPossibleMoves();
     std::vector<IPoint> GetMovesByBehaviour();
+    void CheckMovesInDirection(std::vector<IPoint>& inVector, IPoint direction);
 
 };

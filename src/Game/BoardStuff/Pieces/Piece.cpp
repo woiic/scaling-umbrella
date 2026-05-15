@@ -202,31 +202,61 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
     }
     case PieceType::BISHOP:
     {
-
-        for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
+        CheckMovesInDirection(points, IPoint(1  ,   1));
+        CheckMovesInDirection(points, IPoint(1  ,  -1));
+        CheckMovesInDirection(points, IPoint(-1 ,   1));
+        CheckMovesInDirection(points, IPoint(-1 ,  -1));
+        /*for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  1));
+            auto result = boardRef->VerifyMove(this, position + i * IPoint(1 ,  1));
+            if (result != MoveResult::NON_POSSIBLE) 
+            {
+                points.push_back(position + i * IPoint(1 ,  1));
+                if (result == MoveResult::CAPTURE) break;
+            }
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(1 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 , -1));
+            auto result = boardRef->VerifyMove(this, position + i * IPoint(1 ,  -1));
+            if (result != MoveResult::NON_POSSIBLE) 
+            {
+                points.push_back(position + i * IPoint(1 ,  -1));
+                if (result == MoveResult::CAPTURE) break;
+            }
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1,  1));
+            
+            auto result = boardRef->VerifyMove(this, position + i * IPoint(-1 ,  1));
+            if (result != MoveResult::NON_POSSIBLE)
+            {
+                points.push_back(position + i * IPoint(-1 ,  1));
+                if (result == MoveResult::CAPTURE) break;
+            }
             else break;
         }
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
-            if (boardRef->VerifyMove(this, position + i * IPoint(-1, -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(-1, -1));
+            auto result = boardRef->VerifyMove(this, position + i * IPoint(-1 ,  -1));
+            if (result != MoveResult::NON_POSSIBLE)
+            {
+                points.push_back(position + i * IPoint(-1 ,  -1));
+                if (result == MoveResult::CAPTURE) break;
+            }
             else break;
         }
+        */
         break;
     }
     case PieceType::ROOK:
     {
+        CheckMovesInDirection(points, IPoint(1  ,   0));
+        CheckMovesInDirection(points, IPoint(0  ,   1));
+        CheckMovesInDirection(points, IPoint(-1 ,   0));
+        CheckMovesInDirection(points, IPoint(0  ,  -1));
+        /*
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
             if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  0)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  0));
@@ -247,10 +277,20 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
             if (boardRef->VerifyMove(this, position + i * IPoint(0 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(0 , -1));
             else break;
         }
+        */
         break;
     }
     case PieceType::QUEEN:
     {
+        CheckMovesInDirection(points, IPoint(1  ,   1));
+        CheckMovesInDirection(points, IPoint(1  ,   0));
+        CheckMovesInDirection(points, IPoint(1  ,  -1));
+        CheckMovesInDirection(points, IPoint(0  ,  -1));
+        CheckMovesInDirection(points, IPoint(-1 ,  -1));
+        CheckMovesInDirection(points, IPoint(-1 ,   0));
+        CheckMovesInDirection(points, IPoint(-1 ,   1));
+        CheckMovesInDirection(points, IPoint(0  ,   1));
+        /*
         for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
         {
             if (boardRef->VerifyMove(this, position + i * IPoint(1 ,  1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(1 ,  1));
@@ -291,6 +331,7 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
             if (boardRef->VerifyMove(this, position + i * IPoint(0 , -1)) != MoveResult::NON_POSSIBLE) points.push_back(position + i * IPoint(0 , -1));
             else break;
         }
+        */
         break;
     }
     case PieceType::KING:
@@ -314,4 +355,18 @@ std::vector<IPoint> Piece::GetMovesByBehaviour()
         break;
     }
     return points;
+}
+
+void Piece::CheckMovesInDirection(std::vector<IPoint>& inVector, IPoint direction)
+{
+    for (int i=1; i<(__max(boardRef->boardWidth, boardRef->boardHeight) - 1); i++)
+    {
+        auto result = boardRef->VerifyMove(this, position + i * direction);
+        if (result != MoveResult::NON_POSSIBLE) 
+        {
+            inVector.push_back(position + i * direction);
+            if (result == MoveResult::CAPTURE) break;
+        }
+        else break;
+    }
 }
