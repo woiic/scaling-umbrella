@@ -130,12 +130,11 @@ bool Board::AddPieces(json inJson){
                 [](unsigned char c){ return std::tolower(c); });
 
             LOG_DEBUG(pieceName);
-            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/white_" + pieceName + ".png" );
+            newPiece->ObjectSprite = TextureManager::GetSprite("assets/Sprites/white_" + pieceName + ".png" );
             newPiece->SetSpriteRelativePosition(FPoint((TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f, (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
             newPiece->pieceTeam = Team::WHITE;
             Color c = Color();
-            //FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
-            //                        (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            
             FPoint piecePos = FPoint((float)(column*TILE_WIDTH ),
                                      (float)(row*TILE_HEIGHT));
             Area2D tempArea2D = Area2D(piecePos,
@@ -178,13 +177,13 @@ bool Board::AddPieces(json inJson){
 
             std::transform(pieceName.begin(), pieceName.end(), pieceName.begin(),
                 [](unsigned char c){ return std::tolower(c); });
-            newPiece->ObjectSprite = TextureManager::Get("assets/Sprites/black_" + pieceName + ".png" );
-            //newPiece->ObjectSprite->SetRelativePosition((TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f, (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f);
+
+            newPiece->ObjectSprite = TextureManager::GetSprite("assets/Sprites/black_" + pieceName + ".png" );
             newPiece->SetSpriteRelativePosition(FPoint((TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f, (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
             newPiece->pieceTeam = Team::BLACK;
+
             Color c = Color();
-            //FPoint piecePos = FPoint((float)(column*TILE_WIDTH + (TILE_WIDTH - newPiece->GetSpriteWH().x)/2.0f),
-            //                         (float)(row*TILE_HEIGHT + (TILE_HEIGHT - newPiece->GetSpriteWH().y)/2.0f));
+            
             FPoint piecePos = FPoint((float)(column*TILE_WIDTH ),
                                      (float)(row*TILE_HEIGHT));
             Area2D tempArea2D = Area2D(piecePos,

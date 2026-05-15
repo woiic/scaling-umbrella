@@ -80,7 +80,8 @@ Sprite* TextureManager::GetSprite(const std::string& name)
 {
     auto it = spritesTextures.find(name);
     if (it != spritesTextures.end()) {
-        return it->second;
+        auto s = it->second;
+        return new Sprite(s->path, s->file_name, s->TEXTURE_WIDTH, s->TEXTURE_HEIGHT, s->Get());
     }
     return nullptr;
 }
@@ -127,11 +128,11 @@ size_t TextureManager::CountTexts()
 
 Text* TextureManager::GetText(const std::string& name)
 {
-    auto it = textures.find(name);
-    if (it != textures.end()) {
+    auto it = textsTextures.find(name);
+    if (it != textsTextures.end()) {
         //return it->second;
         auto s = it->second;
-        return new Sprite(s->path, s->file_name, s->TEXTURE_WIDTH, s->TEXTURE_HEIGHT, s->Get());
+        return new Text(s->path, s->file_name, s->TEXT_WIDTH, s->TEXT_HEIGHT, s->Get());
     }
     return nullptr;
 }
@@ -139,9 +140,18 @@ Text* TextureManager::GetText(const std::string& name)
 
 void TextureManager::Clear()
 {
-    for (auto& [id, sprite] : spritesTextures) {
-            delete sprite;
-            sprite = nullptr;
-        }
-        spritesTextures.clear();
+    for (auto& [id, sprite] : spritesTextures) 
+    {
+        delete sprite;
+        sprite = nullptr;
+    }
+    spritesTextures.clear();
+
+    for (auto& [id, text] : textsTextures) 
+    {
+        delete text;
+        text = nullptr;
+    }
+    textsTextures.clear();
+
 }

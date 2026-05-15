@@ -99,8 +99,8 @@ bool Renderer::DrawSprite(Sprite* inSprite, Area2D inArea2D)
     }
     SDL_FRect tempRect
     {
-        tempRect.x=inArea2D.position.x,
-        tempRect.y=inArea2D.position.y,
+        tempRect.x=inArea2D.position.x + inSprite->relativePosition.x,
+        tempRect.y=inArea2D.position.y + inSprite->relativePosition.y,
         tempRect.w=(float)inSprite->TEXTURE_WIDTH,
         tempRect.h=(float)inSprite->TEXTURE_HEIGHT
     };
@@ -117,10 +117,10 @@ bool Renderer::DrawText(Text* inText, Area2D inArea2D)
     }
     SDL_FRect tempRect
     {
-        tempRect.x=inArea2D.position.x + inSprite->relativePosition.x,
-        tempRect.y=inArea2D.position.y + inSprite->relativePosition.y,
-        tempRect.w=(float)inSprite->TEXTURE_WIDTH,
-        tempRect.h=(float)inSprite->TEXTURE_HEIGHT
+        tempRect.x=inArea2D.position.x,// + inText->relativePosition.x,
+        tempRect.y=inArea2D.position.y,// + inText->relativePosition.y,
+        tempRect.w=(float)inText->TEXT_WIDTH,
+        tempRect.h=(float)inText->TEXT_HEIGHT
     };
     SDL_RenderTexture(SDLRenderer, inText->Get(), NULL, &tempRect);
     return true;
