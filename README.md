@@ -2,6 +2,10 @@
 
 A small C++ game/engine project for learning C++ and get more experience developing software alone. Currently I'm working with CMake and vcpkg for dependency management. This project Provides core engine pieces (Engine, Renderer, InputHandler) for simple 2D games, and more speceific game logic for 2D strategy games (tabletop games) and the example entry in `src/main.cpp`.
 
+## Testing
+
+Its posible to try a build at //BUILD_PARA_PROBAR and executing the SCALING_UMBRELLA.exe file for a quick try, but the project is still in progress so it's not entirely functional yet.
+
 ## What have I learned
 
 To this day, I have learned a lot of C++, the diferences between Unreal Engine C++ and pure are clear, Unreal aids you a lot without you noticing and having to do everything by hand makes you notice it all.
